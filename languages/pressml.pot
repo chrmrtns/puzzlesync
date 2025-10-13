@@ -1,640 +1,820 @@
-# Copyright (C) 2024 PressML
-# This file is distributed under the same license as the PressML package.
+# Copyright (C) 2025 Chris Martens
+# This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: PressML 1.0.0\n"
+"Project-Id-Version: PressML - Multilingual Content Manager 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pressml\n"
-"POT-Creation-Date: 2024-09-22 17:59:00+00:00\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: PressML POT Generator\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2025-10-13T17:29:10+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: pressml\n"
 
-#: pressml.php:125
-msgid "Settings"
+#. Plugin Name of the plugin
+#: pressml.php
+msgid "PressML - Multilingual Content Manager"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: pressml.php
+msgid "https://github.com/chrmrtns/pressML"
+msgstr ""
+
+#. Description of the plugin
+#: pressml.php
+msgid "Advanced multilingual hreflang management system for WordPress with custom database storage"
+msgstr ""
+
+#. Author of the plugin
+#: pressml.php
+msgid "Chris Martens"
+msgstr ""
+
+#. Author URI of the plugin
+#: pressml.php
+msgid "https://pressml.com"
 msgstr ""
 
 #: includes/class-chrmrtns-pml-admin.php:48
 msgid "PressML - Multilanguage Settings"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:99
+#. translators: %s: Language name
+#: includes/class-chrmrtns-pml-admin.php:86
 #, php-format
 msgid "%s URL:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:110
+#: includes/class-chrmrtns-pml-admin.php:102
+#: includes/class-chrmrtns-pml-admin.php:1135
 msgid "Translation Group:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:116
-msgid "Set as Default Language (x-default)"
+#: includes/class-chrmrtns-pml-admin.php:107
+msgid "Groups related translations for automatic linking"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:120
-msgid "Sync Translation Group"
+#: includes/class-chrmrtns-pml-admin.php:109
+#: includes/class-chrmrtns-pml-admin.php:959
+msgid "Sync from Translation Group"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:115
+msgid "x-default Language:"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:118
+msgid "Automatic"
 msgstr ""
 
 #: includes/class-chrmrtns-pml-admin.php:125
-msgid "Validate URLs"
+msgid "Default language for international users"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:451
+#: includes/class-chrmrtns-pml-admin.php:131
+msgid "Automatic Linking"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:132
+msgid "<strong>Alternative to manual URLs:</strong> Use categories (language names) + Translation Groups for automatic linking."
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:133
+msgid "For each language, create categories or tags with the language name (e.g., \"english\", \"français\", \"deutsch\") or version tags (e.g., \"english-version\", \"français-version\")."
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:134
+msgid "<strong>Priority:</strong> Database entries → Custom Fields → Categories + Translation Groups"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:135
+msgid "<strong>Single language posts:</strong> Leave empty - no hreflang tags will be set!"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:380
+#: includes/class-chrmrtns-pml-admin.php:381
 msgid "PressML"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:468
+#: includes/class-chrmrtns-pml-admin.php:391
+#: includes/class-chrmrtns-pml-admin.php:392
 msgid "Validator"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:476
+#: includes/class-chrmrtns-pml-admin.php:400
+#: includes/class-chrmrtns-pml-admin.php:401
+#: includes/class-chrmrtns-pml-admin.php:634
+#: includes/class-chrmrtns-pml-admin.php:655
 msgid "Languages"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:484
-msgid "Help"
+#: includes/class-chrmrtns-pml-admin.php:409
+#: includes/class-chrmrtns-pml-admin.php:410
+msgid "Statistics"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:513
+#: includes/class-chrmrtns-pml-admin.php:418
+#: includes/class-chrmrtns-pml-admin.php:419
+msgid "How to Use"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:442
 msgid "Settings saved!"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:524
+#: includes/class-chrmrtns-pml-admin.php:453
 msgid "PressML Settings"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:532
+#: includes/class-chrmrtns-pml-admin.php:460
 msgid "Enable PressML"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:533
-msgid "Enable hreflang tag generation"
+#: includes/class-chrmrtns-pml-admin.php:464
+msgid "Enable hreflang tags output"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:537
+#: includes/class-chrmrtns-pml-admin.php:470
 msgid "Auto-detect Language"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:538
+#: includes/class-chrmrtns-pml-admin.php:474
 msgid "Automatically detect language from categories and tags"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:542
-msgid "Enable JSON-LD"
+#: includes/class-chrmrtns-pml-admin.php:480
+msgid "JSON-LD Output"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:543
-msgid "Include hreflang data in JSON-LD structured data"
+#: includes/class-chrmrtns-pml-admin.php:484
+msgid "Add structured data for multilingual content"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:547
+#: includes/class-chrmrtns-pml-admin.php:490
 msgid "Show Flags"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:548
-msgid "Show flag emojis in language switchers"
+#: includes/class-chrmrtns-pml-admin.php:494
+msgid "Show language flags in admin columns"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:552
-msgid "Auto Menu Flags"
+#: includes/class-chrmrtns-pml-admin.php:499
+msgid "Automatic Menu Flags"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:553
-msgid "Automatically add language flags to navigation menus"
+#: includes/class-chrmrtns-pml-admin.php:503
+msgid "Automatically add language flags to the end of navigation menus"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:558
+#: includes/class-chrmrtns-pml-admin.php:506
+msgid "When enabled, language flags will automatically appear at the end of navigation menus. When disabled, you can manually add them using Custom Links with URL \"#pressml-language-flags\"."
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:511
 msgid "Menu Flags Display"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:559
-msgid "How to display language flags in menus"
+#: includes/class-chrmrtns-pml-admin.php:515
+msgid "Row (side by side)"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:562
-msgid "Side by side (row)"
+#: includes/class-chrmrtns-pml-admin.php:518
+msgid "Column (stacked)"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:563
-msgid "Stacked (column)"
+#: includes/class-chrmrtns-pml-admin.php:522
+msgid "Choose how language flags appear in navigation menus."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:566
-msgid "Save Settings"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-admin.php:611
+#: includes/class-chrmrtns-pml-admin.php:540
 msgid "PressML Validator"
 msgstr ""
 
+#: includes/class-chrmrtns-pml-admin.php:550
+msgid "All hreflang configurations are valid!"
+msgstr ""
+
+#. translators: %d: Number of issues found
+#: includes/class-chrmrtns-pml-admin.php:553
+#, php-format
+msgid "Found %d issues:"
+msgstr ""
+
+#. translators: %d: Number of orphaned entries cleaned up
+#: includes/class-chrmrtns-pml-admin.php:568
+#, php-format
+msgid "Cleaned up %d orphaned entries"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:574
+msgid "This tool validates all hreflang configurations across your site."
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:576
+msgid "Run Validation"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:577
+msgid "Clean Orphaned Entries"
+msgstr ""
+
+#. translators: %1$d: Number of entries deleted, %2$d: Post ID
+#: includes/class-chrmrtns-pml-admin.php:602
+#, php-format
+msgid "Deleted %1$d hreflang entries for post ID %2$d"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:613
+msgid "PressML Statistics"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:616
+msgid "Overview"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:619
+msgid "Total Entries:"
+msgstr ""
+
 #: includes/class-chrmrtns-pml-admin.php:623
-msgid "Validation Results"
+msgid "Posts with Hreflang:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:662
-msgid "Validate Hreflang Data"
+#: includes/class-chrmrtns-pml-admin.php:627
+msgid "Translation Groups:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:666
-msgid "Auto-fix Issues"
+#: includes/class-chrmrtns-pml-admin.php:639
+#: includes/class-chrmrtns-pml-admin.php:693
+msgid "entries"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:676
-msgid "Validate"
+#: includes/class-chrmrtns-pml-admin.php:646
+msgid "Posts/Pages with Hreflang Entries"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:811
-msgid "Languages saved!"
+#: includes/class-chrmrtns-pml-admin.php:647
+msgid "All posts and pages that currently have hreflang entries in the database:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:823
-msgid "Language Management"
+#: includes/class-chrmrtns-pml-admin.php:651
+msgid "ID"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:826
-msgid "Supported Languages"
+#: includes/class-chrmrtns-pml-admin.php:652
+msgid "Title"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:827
-msgid "Add or remove languages for your multilingual site. Each language needs a language code (like \"en\" or \"de\"), a name, and a flag emoji."
+#: includes/class-chrmrtns-pml-admin.php:653
+msgid "Type"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:837
-msgid "Language Code"
+#: includes/class-chrmrtns-pml-admin.php:654
+msgid "Status"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:838
-msgid "Language Name"
+#: includes/class-chrmrtns-pml-admin.php:656
+msgid "Translation Group"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:839
-msgid "Flag"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-admin.php:840
+#: includes/class-chrmrtns-pml-admin.php:657
+#: includes/class-chrmrtns-pml-admin.php:767
 msgid "Actions"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:860
+#: includes/class-chrmrtns-pml-admin.php:676
+msgid "Post not found"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:678
+msgid "deleted"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:702
+msgid "Edit"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:704
+msgid "Are you sure you want to delete all hreflang entries for this post?"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:704
+msgid "Delete Hreflang"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:740
+msgid "Languages saved!"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:752
+msgid "Language Management"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:755
+msgid "Supported Languages"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:756
+msgid "Add or remove languages for your multilingual site. Each language needs a language code (like \"en\" or \"de\"), a name, and a flag emoji."
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:764
+#: includes/class-chrmrtns-pml-admin.php:814
+msgid "Code"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:765
+msgid "Language Name"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:766
+#: includes/class-chrmrtns-pml-admin.php:815
+msgid "Flag"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:790
+#: includes/class-chrmrtns-pml-admin.php:978
 msgid "Remove"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:866
+#: includes/class-chrmrtns-pml-admin.php:800
 msgid "Add Language"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:867
-msgid "Save Languages"
+#: includes/class-chrmrtns-pml-admin.php:809
+msgid "Common Language Codes & Flags"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:921
-msgid "Remove"
+#: includes/class-chrmrtns-pml-admin.php:810
+msgid "Here are some common language codes and their corresponding flag emojis:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:972
+#: includes/class-chrmrtns-pml-admin.php:813
+msgid "Language"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:860
 msgid "Translations"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:984
+#: includes/class-chrmrtns-pml-admin.php:872
 msgid "Single language"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1056
+#: includes/class-chrmrtns-pml-admin.php:952
+msgid "Please enter a translation group first!"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:953
+msgid "Syncing..."
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:954
+msgid "Translation URLs synchronized!"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:955
+msgid "fields updated"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:956
+msgid "No matching URL fields found to update"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:957
+msgid "Sync failed"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:958
+msgid "AJAX error occurred"
+msgstr ""
+
+#: includes/class-chrmrtns-pml-admin.php:992
 msgid "Missing required parameters"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1063
+#: includes/class-chrmrtns-pml-admin.php:999
 msgid "Translation group is empty"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1123
+#: includes/class-chrmrtns-pml-admin.php:1059
 msgid "No related translations found"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1148
+#: includes/class-chrmrtns-pml-admin.php:1084
 msgid "Missing post ID parameter"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1159
+#. translators: %s: Language code
+#: includes/class-chrmrtns-pml-admin.php:1095
 #, php-format
 msgid "Invalid URL for language %s"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1164
+#: includes/class-chrmrtns-pml-admin.php:1100
 msgid "All URLs are valid"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1178
+#: includes/class-chrmrtns-pml-admin.php:1112
 msgid "How to Use PressML"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1183
+#: includes/class-chrmrtns-pml-admin.php:1117
 msgid "Getting Started"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1184
+#: includes/class-chrmrtns-pml-admin.php:1118
 msgid "PressML helps you manage multilingual content with proper hreflang tags. Follow these steps to set up your multilingual site:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1187
+#: includes/class-chrmrtns-pml-admin.php:1121
 msgid "Create categories for languages:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1187
+#: includes/class-chrmrtns-pml-admin.php:1121
 msgid "Create categories named \"English\" and \"German\" (or \"english\" and \"german\")."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1188
+#: includes/class-chrmrtns-pml-admin.php:1122
 msgid "Assign posts to language categories:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1188
+#: includes/class-chrmrtns-pml-admin.php:1122
 msgid "When creating/editing posts, assign them to the appropriate language category."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1189
+#: includes/class-chrmrtns-pml-admin.php:1123
 msgid "Link translations together:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1189
+#: includes/class-chrmrtns-pml-admin.php:1123
 msgid "Use the PressML meta box in the post editor to link related translations."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1193
+#: includes/class-chrmrtns-pml-admin.php:1128
 msgid "Using the Post Editor"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1194
+#: includes/class-chrmrtns-pml-admin.php:1129
 msgid "When editing a post or page, you'll find the PressML meta box below the editor:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1196
+#: includes/class-chrmrtns-pml-admin.php:1131
 msgid "Meta Box Fields:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1198
+#: includes/class-chrmrtns-pml-admin.php:1133
 msgid "English URL:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1198
+#: includes/class-chrmrtns-pml-admin.php:1133
 msgid "Enter the URL of the English version of this content"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1199
+#: includes/class-chrmrtns-pml-admin.php:1134
 msgid "German URL:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1199
+#: includes/class-chrmrtns-pml-admin.php:1134
 msgid "Enter the URL of the German version of this content"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1200
-msgid "Translation Group:"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-admin.php:1200
+#: includes/class-chrmrtns-pml-admin.php:1135
 msgid "A unique identifier to group related translations together"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1201
+#: includes/class-chrmrtns-pml-admin.php:1136
 msgid "Set as Default Language:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1201
+#: includes/class-chrmrtns-pml-admin.php:1136
 msgid "Check this if this page should be the default (x-default) version"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1206
+#: includes/class-chrmrtns-pml-admin.php:1141
 msgid "Language Detection"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1207
+#: includes/class-chrmrtns-pml-admin.php:1142
 msgid "PressML detects the language of your content using:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1210
+#: includes/class-chrmrtns-pml-admin.php:1145
 msgid "Categories:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1211
+#: includes/class-chrmrtns-pml-admin.php:1146
 msgid "Tags:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1212
+#: includes/class-chrmrtns-pml-admin.php:1147
 msgid "Site Locale:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1212
+#: includes/class-chrmrtns-pml-admin.php:1147
 msgid "Falls back to your WordPress locale setting"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1217
+#: includes/class-chrmrtns-pml-admin.php:1152
 msgid "Using Shortcodes"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1218
+#: includes/class-chrmrtns-pml-admin.php:1153
 msgid "Add language switching functionality to your posts and pages:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1220
+#: includes/class-chrmrtns-pml-admin.php:1155
 msgid "Available Shortcodes:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1223
+#: includes/class-chrmrtns-pml-admin.php:1158
 msgid "Displays flag icons that link to other language versions."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1224
-#: includes/class-chrmrtns-pml-admin.php:1235
-#: includes/class-chrmrtns-pml-admin.php:1246
+#: includes/class-chrmrtns-pml-admin.php:1159
+#: includes/class-chrmrtns-pml-admin.php:1170
+#: includes/class-chrmrtns-pml-admin.php:1181
 msgid "Parameters:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1226
+#: includes/class-chrmrtns-pml-admin.php:1161
 msgid "Flag size"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1227
+#: includes/class-chrmrtns-pml-admin.php:1162
 msgid "Display style"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1228
+#: includes/class-chrmrtns-pml-admin.php:1163
 msgid "Show current language flag"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1229
-#: includes/class-chrmrtns-pml-admin.php:1240
-#: includes/class-chrmrtns-pml-admin.php:1249
+#: includes/class-chrmrtns-pml-admin.php:1164
+#: includes/class-chrmrtns-pml-admin.php:1175
+#: includes/class-chrmrtns-pml-admin.php:1184
 msgid "Show debug information"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1231
-#: includes/class-chrmrtns-pml-admin.php:1242
-#: includes/class-chrmrtns-pml-admin.php:1251
+#: includes/class-chrmrtns-pml-admin.php:1166
+#: includes/class-chrmrtns-pml-admin.php:1177
+#: includes/class-chrmrtns-pml-admin.php:1186
 msgid "Example:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1234
+#: includes/class-chrmrtns-pml-admin.php:1169
 msgid "Displays a full language switcher with flags and text."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1237
+#: includes/class-chrmrtns-pml-admin.php:1172
 msgid "Show flag icons"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1238
+#: includes/class-chrmrtns-pml-admin.php:1173
 msgid "Show language names"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1239
+#: includes/class-chrmrtns-pml-admin.php:1174
 msgid "Text between languages"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1245
+#: includes/class-chrmrtns-pml-admin.php:1180
 msgid "Displays the current language."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1248
+#: includes/class-chrmrtns-pml-admin.php:1183
 msgid "Display format"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1255
+#: includes/class-chrmrtns-pml-admin.php:1190
 msgid "Troubleshooting"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1257
+#: includes/class-chrmrtns-pml-admin.php:1192
 msgid "Shortcodes not working?"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1258
+#: includes/class-chrmrtns-pml-admin.php:1193
 msgid "Add debug=\"true\" to any shortcode to see diagnostic information:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1261
+#: includes/class-chrmrtns-pml-admin.php:1196
 msgid "No translations found?"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1263
+#: includes/class-chrmrtns-pml-admin.php:1198
 msgid "Make sure posts have the PressML meta box filled out"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1264
+#: includes/class-chrmrtns-pml-admin.php:1199
 msgid "Check that translation groups match between related posts"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1265
+#: includes/class-chrmrtns-pml-admin.php:1200
 msgid "Verify URLs are correct and accessible"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1266
+#: includes/class-chrmrtns-pml-admin.php:1201
 msgid "Use the Validator page to check for issues"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1269
+#: includes/class-chrmrtns-pml-admin.php:1204
 msgid "Language not detected?"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1271
+#: includes/class-chrmrtns-pml-admin.php:1206
 msgid "Assign posts to \"English\" or \"German\" categories"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1272
+#: includes/class-chrmrtns-pml-admin.php:1207
 msgid "Or add \"english-version\" or \"german-version\" tags"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1273
+#: includes/class-chrmrtns-pml-admin.php:1208
 msgid "Both lowercase and capitalized names work"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1278
+#: includes/class-chrmrtns-pml-admin.php:1213
 msgid "Navigation Menu Integration"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1279
+#: includes/class-chrmrtns-pml-admin.php:1214
 msgid "Add language flags to your navigation menus:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1281
+#: includes/class-chrmrtns-pml-admin.php:1216
 msgid "Method 1: Automatic (Recommended)"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1282
+#: includes/class-chrmrtns-pml-admin.php:1217
 msgid "Language flags automatically appear at the end of your navigation menu when viewing posts/pages that have translations. Only shows flags for other languages (not current language). No setup required!"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1284
+#: includes/class-chrmrtns-pml-admin.php:1219
 msgid "Method 2: Manual Placement"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1286
+#: includes/class-chrmrtns-pml-admin.php:1221
 msgid "Go to Appearance → Menus"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1287
+#: includes/class-chrmrtns-pml-admin.php:1222
 msgid "Add a \"Custom Link\" menu item"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1288
+#: includes/class-chrmrtns-pml-admin.php:1223
 msgid "Set URL to:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1289
+#: includes/class-chrmrtns-pml-admin.php:1224
 msgid "Set Link Text to: \"Language Flags\""
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1290
+#: includes/class-chrmrtns-pml-admin.php:1225
 msgid "Save menu"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1292
+#: includes/class-chrmrtns-pml-admin.php:1227
 msgid "The custom link will be replaced with actual flag links only when translations exist."
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1296
+#: includes/class-chrmrtns-pml-admin.php:1231
 msgid "Tools & Validation"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1297
+#: includes/class-chrmrtns-pml-admin.php:1232
 msgid "Use the built-in tools to maintain your multilingual setup:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1300
+#: includes/class-chrmrtns-pml-admin.php:1235
 msgid "Validator:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1300
+#: includes/class-chrmrtns-pml-admin.php:1235
 msgid "Checks for common issues and can auto-fix some problems"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1301
+#: includes/class-chrmrtns-pml-admin.php:1236
 msgid "Statistics:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1301
+#: includes/class-chrmrtns-pml-admin.php:1236
 msgid "Shows overview of your multilingual content"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1302
+#: includes/class-chrmrtns-pml-admin.php:1237
 msgid "Settings:"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-admin.php:1302
+#: includes/class-chrmrtns-pml-admin.php:1237
 msgid "Configure plugin behavior and supported languages"
 msgstr ""
 
+#. translators: %d: Post ID
 #: includes/class-chrmrtns-pml-validator.php:59
 #, php-format
 msgid "Post ID %d no longer exists but has hreflang entries"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$s: Language code, %3$s: URL
 #: includes/class-chrmrtns-pml-validator.php:70
 #, php-format
 msgid "Invalid URL format for %1$s (language: %2$s): %3$s"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$s: Language code, %3$s: URL
 #: includes/class-chrmrtns-pml-validator.php:83
 #, php-format
 msgid "URL not accessible for %1$s (language: %2$s): %3$s"
 msgstr ""
 
+#. translators: %1$d: HTTP response code, %2$s: Post title, %3$s: Language code, %4$s: URL
 #: includes/class-chrmrtns-pml-validator.php:91
 #, php-format
 msgid "URL returns error %1$d for %2$s (language: %3$s): %4$s"
 msgstr ""
 
+#. translators: %s: Translation group name
 #: includes/class-chrmrtns-pml-validator.php:125
 #, php-format
 msgid "Translation group \"%s\" has inconsistent language coverage"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$d: Post ID, %3$s: Language code
 #: includes/class-chrmrtns-pml-validator.php:140
 #, php-format
 msgid "Post \"%1$s\" (ID: %2$d) is missing reference to %3$s language"
 msgstr ""
 
+#. translators: %1$s: Translation group name, %2$d: Number of posts
 #: includes/class-chrmrtns-pml-validator.php:164
 #, php-format
 msgid "Translation group \"%1$s\" has only %2$d post(s)"
 msgstr ""
 
+#. translators: %1$s: Translation group name, %2$s: Language code
 #: includes/class-chrmrtns-pml-validator.php:184
 #, php-format
 msgid "Translation group \"%1$s\" has multiple posts for language %2$s"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$d: Post ID
 #: includes/class-chrmrtns-pml-validator.php:213
 #, php-format
 msgid "Post \"%1$s\" (ID: %2$d) has multiple x-default entries"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$d: Post ID
 #: includes/class-chrmrtns-pml-validator.php:224
 #, php-format
 msgid "Post \"%1$s\" (ID: %2$d) has multiple languages but no x-default set"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$s: Detected language, %3$s: Self-referenced language
 #: includes/class-chrmrtns-pml-validator.php:260
 #, php-format
 msgid "Post \"%1$s\" detected as %2$s but self-references as %3$s"
 msgstr ""
 
+#. translators: %s: Post title
 #: includes/class-chrmrtns-pml-validator.php:274
 #, php-format
 msgid "Post \"%s\" has hreflang tags but no self-reference"
 msgstr ""
 
+#. translators: %d: Number of orphaned entries
 #: includes/class-chrmrtns-pml-validator.php:298
 #, php-format
 msgid "%d orphaned hreflang entries found (posts no longer exist)"
 msgstr ""
 
+#. translators: %1$s: Post title, %2$d: Post ID, %3$s: Language code
 #: includes/class-chrmrtns-pml-validator.php:325
 #, php-format
 msgid "Duplicate entries found for post \"%1$s\" (ID: %2$d), language %3$s"
 msgstr ""
 
+#. translators: %d: Number of orphaned entries removed
 #: includes/class-chrmrtns-pml-validator.php:368
 #, php-format
 msgid "Removed %d orphaned entries"
 msgstr ""
 
+#. translators: %d: Number of self-references added
 #: includes/class-chrmrtns-pml-validator.php:378
 #, php-format
 msgid "Added %d missing self-references"
 msgstr ""
 
+#. translators: %d: Number of x-default values set
 #: includes/class-chrmrtns-pml-validator.php:388
 #, php-format
 msgid "Set %d missing x-default values"
 msgstr ""
 
-#: includes/class-chrmrtns-pml-frontend.php:115
-msgid "Debug: Current post ID:"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-frontend.php:116
-msgid "Debug: Hreflang data found:"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-frontend.php:117
-msgid "Debug: Supported languages:"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-frontend.php:118
-msgid "Debug: Show flags setting:"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-frontend.php:158
-msgid "Visit site in"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-frontend.php:221
-msgid "Debug: Current language detected as:"
-msgstr ""
-
-#: includes/class-chrmrtns-pml-frontend.php:222
-msgid "Debug: Available languages:"
+#: pressml.php:125
+msgid "Settings"
 msgstr ""

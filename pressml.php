@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: PressML - Multilingual Content Manager
- * Plugin URI: https://github.com/chrmrtns/pressML
+ * Plugin URI: https://pressml.com
  * Description: Advanced multilingual hreflang management system for WordPress with custom database storage
- * Version: 1.0.0
+ * Version: 1.0.2
  * Author: Chris Martens
- * Author URI: https://pressml.com
+ * Author URI: https://chris-martens.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: pressml
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('CHRMRTNS_PML_VERSION', '1.0.0');
+define('CHRMRTNS_PML_VERSION', '1.0.2');
 define('CHRMRTNS_PML_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('CHRMRTNS_PML_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('CHRMRTNS_PML_PLUGIN_BASENAME', plugin_basename(__FILE__));

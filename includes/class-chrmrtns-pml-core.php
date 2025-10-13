@@ -45,9 +45,17 @@ class Chrmrtns_Pml_Core {
             return;
         }
 
+        // First pass: Output all language-specific tags
         foreach ($hreflang_data as $item) {
-            $hreflang = ($item->is_x_default) ? 'x-default' : $item->language_code;
-            echo '<link rel="alternate" hreflang="' . esc_attr($hreflang) . '" href="' . esc_url($item->url) . '" />' . "\n";
+            echo '<link rel="alternate" hreflang="' . esc_attr($item->language_code) . '" href="' . esc_url($item->url) . '" />' . "\n";
+        }
+
+        // Second pass: Output x-default tag if one is marked
+        foreach ($hreflang_data as $item) {
+            if ($item->is_x_default) {
+                echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($item->url) . '" />' . "\n";
+                break; // Only output one x-default tag
+            }
         }
     }
 
@@ -223,7 +231,8 @@ class Chrmrtns_Pml_Core {
 
         $translations = array();
         foreach ($hreflang_data as $item) {
-            if (!$item->is_x_default && $item->url !== get_permalink($post->ID)) {
+            // Include all translations except the current page itself
+            if ($item->url !== get_permalink($post->ID)) {
                 $translations[] = array(
                     '@type' => 'WebPage',
                     'url' => $item->url,

@@ -109,24 +109,3 @@ Yes, several functions are available:
 
 = 1.0.0 =
 Initial release of PressML - Multilingual Content Manager.
-
-== Developer Documentation ==
-
-= Hooks & Filters =
-
-The plugin provides several hooks for customization:
-
-* `pressml_supported_languages` - Modify supported languages
-* `pressml_detect_language` - Custom language detection
-* `pressml_hreflang_tags` - Modify hreflang output
-
-= Database Structure =
-
-Creates table `wp_chrmrtns_pml_hreflang` with fields:
-* post_id, language_code, url, is_x_default, translation_group, priority
-
-= Requirements =
-
-* WordPress 5.8+
-* PHP 7.4+
-* MySQL 5.7+

@@ -70,19 +70,6 @@ class Chrmrtns_Pml_Admin {
             $urls[$item->language_code] = $item->url;
         }
         ?>
-        <style>
-            .chrmrtns-pml-meta-box table { width: 100%; }
-            .chrmrtns-pml-meta-box td { padding: 10px 5px; }
-            .chrmrtns-pml-meta-box input[type="url"],
-            .chrmrtns-pml-meta-box input[type="text"] { width: 100%; }
-            .chrmrtns-pml-info-box {
-                background: #f0f0f1;
-                padding: 15px;
-                margin-top: 20px;
-                border-left: 4px solid #2271b1;
-            }
-        </style>
-
         <div class="chrmrtns-pml-meta-box">
             <table class="form-table">
                 <?php
@@ -148,64 +135,6 @@ class Chrmrtns_Pml_Admin {
                 <p><?php echo wp_kses_post(__('<strong>Single language posts:</strong> Leave empty - no hreflang tags will be set!', 'pressml')); ?></p>
             </div>
         </div>
-
-        <script>
-        jQuery(document).ready(function($) {
-            $('#chrmrtns_pml_sync_group').on('click', function(e) {
-                e.preventDefault();
-
-                var translationGroup = $('#chrmrtns_pml_translation_group').val();
-                if (!translationGroup) {
-                    alert('<?php echo esc_js(__('Please enter a translation group first!', 'pressml')); ?>');
-                    return;
-                }
-
-                var button = $(this);
-                button.prop('disabled', true).text('<?php echo esc_js(__('Syncing...', 'pressml')); ?>');
-
-                $.ajax({
-                    url: ajaxurl,
-                    type: 'POST',
-                    data: {
-                        action: 'chrmrtns_pml_sync_translation_group',
-                        translation_group: translationGroup,
-                        post_id: <?php echo (int) $post->ID; ?>,
-                        nonce: '<?php echo esc_attr(wp_create_nonce('chrmrtns_pml_sync')); ?>'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            var urlsUpdated = 0;
-                            // Loop through all returned URLs and populate corresponding fields
-                            $.each(response.data, function(key, url) {
-                                if (key.endsWith('_url')) {
-                                    var langCode = key.replace('_url', '');
-                                    var fieldId = '#chrmrtns_pml_hreflang_' + langCode;
-                                    if ($(fieldId).length) {
-                                        $(fieldId).val(url);
-                                        urlsUpdated++;
-                                    }
-                                }
-                            });
-
-                            if (urlsUpdated > 0) {
-                                alert('<?php echo esc_js(__('Translation URLs synchronized!', 'pressml')); ?>' + ' (' + urlsUpdated + ' <?php echo esc_js(__('fields updated', 'pressml')); ?>)');
-                            } else {
-                                alert('<?php echo esc_js(__('No matching URL fields found to update', 'pressml')); ?>');
-                            }
-                        } else {
-                            alert(response.data || '<?php echo esc_js(__('Sync failed', 'pressml')); ?>');
-                        }
-                    },
-                    error: function() {
-                        alert('<?php echo esc_js(__('AJAX error occurred', 'pressml')); ?>');
-                    },
-                    complete: function() {
-                        button.prop('disabled', false).text('<?php echo esc_js(__('Sync from Translation Group', 'pressml')); ?>');
-                    }
-                });
-            });
-        });
-        </script>
         <?php
     }
 
@@ -898,49 +827,6 @@ class Chrmrtns_Pml_Admin {
                 </table>
             </div>
         </div>
-
-        <script>
-        jQuery(document).ready(function($) {
-            let languageIndex = <?php echo count($languages); ?>;
-
-            $('#chrmrtns-pml-add-language').click(function() {
-                const newRow = `
-                    <tr>
-                        <td>
-                            <input type="text" name="languages[${languageIndex}][code]"
-                                   value="" placeholder="en" maxlength="5" required style="width: 60px;" />
-                        </td>
-                        <td>
-                            <input type="text" name="languages[${languageIndex}][name]"
-                                   value="" placeholder="English" required style="width: 100%;" />
-                        </td>
-                        <td>
-                            <input type="text" name="languages[${languageIndex}][flag]"
-                                   value="" placeholder="🇺🇸" maxlength="10" required style="width: 60px;" />
-                        </td>
-                        <td>
-                            <button type="button" class="button chrmrtns-pml-remove-language">
-                                <?php esc_html_e('Remove', 'pressml'); ?>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-                $('#chrmrtns-pml-languages-table tbody').append(newRow);
-                languageIndex++;
-                updateRemoveButtons();
-            });
-
-            $(document).on('click', '.chrmrtns-pml-remove-language', function() {
-                $(this).closest('tr').remove();
-                updateRemoveButtons();
-            });
-
-            function updateRemoveButtons() {
-                const rows = $('#chrmrtns-pml-languages-table tbody tr').length;
-                $('.chrmrtns-pml-remove-language').prop('disabled', rows <= 1);
-            }
-        });
-        </script>
         <?php
     }
 
@@ -1011,38 +897,86 @@ class Chrmrtns_Pml_Admin {
      * Enqueue admin assets
      */
     public function enqueue_admin_assets($hook) {
-        if (in_array($hook, array('post.php', 'post-new.php'))) {
-            wp_enqueue_script('jquery');
+        $version = defined('CHRMRTNS_PML_VERSION') ? CHRMRTNS_PML_VERSION : '1.0.0';
+
+        // Enqueue admin CSS on all PressML pages
+        if (strpos($hook, 'pressml') !== false || in_array($hook, array('post.php', 'post-new.php'))) {
+            wp_enqueue_style(
+                'pressml-admin-css',
+                plugin_dir_url(dirname(__FILE__)) . 'assets/css/admin.css',
+                array(),
+                $version
+            );
+
+            // Add additional inline styles for PressML settings pages
+            if (strpos($hook, 'pressml') !== false) {
+                $inline_css = '
+                    .chrmrtns-pml-card {
+                        position: relative;
+                        margin-top: 20px;
+                        padding: 0.7em 2em 1em;
+                        min-width: 255px;
+                        max-width: 100%;
+                        border: 1px solid #c3c4c7;
+                        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+                        background: #fff;
+                        box-sizing: border-box;
+                    }
+                    .chrmrtns-pml-meta-box {
+                        background: #fff;
+                        border: 1px solid #ccd0d4;
+                        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+                        padding: 12px;
+                    }
+                ';
+                wp_add_inline_style('pressml-admin-css', $inline_css);
+            }
         }
 
-        // Add admin CSS for PressML pages
-        if (strpos($hook, 'pressml') !== false) {
-            wp_add_inline_style('wp-admin', '
-                .chrmrtns-pml-card {
-                    position: relative;
-                    margin-top: 20px;
-                    padding: 0.7em 2em 1em;
-                    min-width: 255px;
-                    max-width: 100%;
-                    border: 1px solid #c3c4c7;
-                    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-                    background: #fff;
-                    box-sizing: border-box;
-                }
-                .chrmrtns-pml-meta-box {
-                    background: #fff;
-                    border: 1px solid #ccd0d4;
-                    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-                    padding: 12px;
-                }
-                .chrmrtns-pml-info-box {
-                    background: #f1f1f1;
-                    border: 1px solid #ddd;
-                    padding: 10px;
-                    margin-top: 10px;
-                    border-radius: 4px;
-                }
-            ');
+        // Enqueue meta box JavaScript on post edit pages
+        if (in_array($hook, array('post.php', 'post-new.php'))) {
+            global $post;
+
+            wp_enqueue_script(
+                'pressml-meta-box-js',
+                plugin_dir_url(dirname(__FILE__)) . 'assets/js/meta-box.js',
+                array('jquery'),
+                $version,
+                true
+            );
+
+            // Localize script for meta box
+            wp_localize_script('pressml-meta-box-js', 'pressmlMetaBox', array(
+                'postId' => isset($post->ID) ? $post->ID : 0,
+                'nonce' => wp_create_nonce('chrmrtns_pml_sync'),
+                'alertEnterGroup' => __('Please enter a translation group first!', 'pressml'),
+                'textSyncing' => __('Syncing...', 'pressml'),
+                'textSyncSuccess' => __('Translation URLs synchronized!', 'pressml'),
+                'textFieldsUpdated' => __('fields updated', 'pressml'),
+                'alertNoFields' => __('No matching URL fields found to update', 'pressml'),
+                'alertSyncFailed' => __('Sync failed', 'pressml'),
+                'alertAjaxError' => __('AJAX error occurred', 'pressml'),
+                'textSyncButton' => __('Sync from Translation Group', 'pressml')
+            ));
+        }
+
+        // Enqueue settings page JavaScript
+        if (strpos($hook, 'pressml') !== false && strpos($hook, 'settings') !== false) {
+            $languages = get_option('chrmrtns_pml_languages', array());
+
+            wp_enqueue_script(
+                'pressml-settings-js',
+                plugin_dir_url(dirname(__FILE__)) . 'assets/js/settings.js',
+                array('jquery'),
+                $version,
+                true
+            );
+
+            // Localize script for settings page
+            wp_localize_script('pressml-settings-js', 'pressmlSettings', array(
+                'languageCount' => count($languages),
+                'textRemove' => __('Remove', 'pressml')
+            ));
         }
     }
 
