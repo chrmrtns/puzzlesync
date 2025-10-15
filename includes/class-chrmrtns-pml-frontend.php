@@ -23,9 +23,9 @@ class Chrmrtns_Pml_Frontend {
         // For example: language switcher widget, frontend language selector, etc.
 
         // Add shortcodes
-        add_shortcode('pressml_language_switcher', array($this, 'language_switcher_shortcode'));
-        add_shortcode('pressml_current_language', array($this, 'current_language_shortcode'));
-        add_shortcode('pressml_language_flags', array($this, 'language_flags_shortcode'));
+        add_shortcode('puzzlesync_language_switcher', array($this, 'language_switcher_shortcode'));
+        add_shortcode('puzzlesync_current_language', array($this, 'current_language_shortcode'));
+        add_shortcode('puzzlesync_language_flags', array($this, 'language_flags_shortcode'));
 
         // Add frontend styles
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_styles'));
@@ -64,7 +64,7 @@ class Chrmrtns_Pml_Frontend {
 
     /**
      * Language switcher shortcode
-     * Usage: [pressml_language_switcher]
+     * Usage: [puzzlesync_language_switcher]
      */
     public function language_switcher_shortcode($atts) {
         if (!is_singular()) {
@@ -141,7 +141,7 @@ class Chrmrtns_Pml_Frontend {
 
     /**
      * Current language shortcode
-     * Usage: [pressml_current_language]
+     * Usage: [puzzlesync_current_language]
      */
     public function current_language_shortcode($atts) {
         if (!is_singular()) {
@@ -225,7 +225,7 @@ class Chrmrtns_Pml_Frontend {
 
     /**
      * Language flags shortcode - compact flag-only version
-     * Usage: [pressml_language_flags size="medium" style="inline"]
+     * Usage: [puzzlesync_language_flags size="medium" style="inline"]
      */
     public function language_flags_shortcode($atts) {
         if (!is_singular()) {

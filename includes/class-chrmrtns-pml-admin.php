@@ -1154,7 +1154,7 @@ class Chrmrtns_Pml_Admin {
 
                     <h3><?php esc_html_e('Available Shortcodes:', 'puzzlesync'); ?></h3>
 
-                    <h4><code>[pressml_language_flags]</code></h4>
+                    <h4><code>[puzzlesync_language_flags]</code></h4>
                     <p><?php esc_html_e('Displays flag icons that link to other language versions.', 'puzzlesync'); ?></p>
                     <p><strong><?php esc_html_e('Parameters:', 'puzzlesync'); ?></strong></p>
                     <ul>
@@ -1163,9 +1163,9 @@ class Chrmrtns_Pml_Admin {
                         <li><code>show_current="true|false"</code> - <?php esc_html_e('Show current language flag', 'puzzlesync'); ?></li>
                         <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'puzzlesync'); ?></li>
                     </ul>
-                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[pressml_language_flags size="large" style="block"]</code></p>
+                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[puzzlesync_language_flags size="large" style="block"]</code></p>
 
-                    <h4><code>[pressml_language_switcher]</code></h4>
+                    <h4><code>[puzzlesync_language_switcher]</code></h4>
                     <p><?php esc_html_e('Displays a full language switcher with flags and text.', 'puzzlesync'); ?></p>
                     <p><strong><?php esc_html_e('Parameters:', 'puzzlesync'); ?></strong></p>
                     <ul>
@@ -1174,16 +1174,16 @@ class Chrmrtns_Pml_Admin {
                         <li><code>separator=" | "</code> - <?php esc_html_e('Text between languages', 'puzzlesync'); ?></li>
                         <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'puzzlesync'); ?></li>
                     </ul>
-                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[pressml_language_switcher show_flags="true" show_names="false"]</code></p>
+                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[puzzlesync_language_switcher show_flags="true" show_names="false"]</code></p>
 
-                    <h4><code>[pressml_current_language]</code></h4>
+                    <h4><code>[puzzlesync_current_language]</code></h4>
                     <p><?php esc_html_e('Displays the current language.', 'puzzlesync'); ?></p>
                     <p><strong><?php esc_html_e('Parameters:', 'puzzlesync'); ?></strong></p>
                     <ul>
                         <li><code>format="name|code|flag"</code> - <?php esc_html_e('Display format', 'puzzlesync'); ?></li>
                         <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'puzzlesync'); ?></li>
                     </ul>
-                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[pressml_current_language format="flag"]</code></p>
+                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[puzzlesync_current_language format="flag"]</code></p>
                 </div>
 
                 <div class="chrmrtns-pml-card">
@@ -1191,7 +1191,7 @@ class Chrmrtns_Pml_Admin {
 
                     <h3><?php esc_html_e('Shortcodes not working?', 'puzzlesync'); ?></h3>
                     <p><?php esc_html_e('Add debug="true" to any shortcode to see diagnostic information:', 'puzzlesync'); ?></p>
-                    <p><code>[pressml_language_flags debug="true"]</code></p>
+                    <p><code>[puzzlesync_language_flags debug="true"]</code></p>
 
                     <h3><?php esc_html_e('No translations found?', 'puzzlesync'); ?></h3>
                     <ul>
