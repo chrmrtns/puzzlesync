@@ -1,8 +1,8 @@
 <?php
 /**
- * Frontend functionality class for PressML plugin
+ * Frontend functionality class for PuzzleSync plugin
  *
- * @package PressML
+ * @package PuzzleSync
  */
 
 if (!defined('ABSPATH')) {
@@ -75,7 +75,7 @@ class Chrmrtns_Pml_Frontend {
             'show_flags' => 'true',
             'show_names' => 'true',
             'separator' => ' | ',
-            'class' => 'pressml-language-switcher',
+            'class' => 'puzzlesync-language-switcher',
             'debug' => 'false'
         ), $atts);
 
@@ -236,7 +236,7 @@ class Chrmrtns_Pml_Frontend {
             'size' => 'medium', // 'small', 'medium', 'large'
             'style' => 'inline', // 'inline', 'block'
             'show_current' => 'true', // Show current language flag
-            'class' => 'pressml-language-flags',
+            'class' => 'puzzlesync-language-flags',
             'debug' => 'false' // Show debug info
         ), $atts);
 
@@ -309,11 +309,11 @@ class Chrmrtns_Pml_Frontend {
         // Only enqueue on pages that might have shortcodes
         if (is_singular()) {
             wp_add_inline_style('wp-block-library', '
-                .pressml-language-switcher {
+                .puzzlesync-language-switcher {
                     display: inline-block;
                     margin: 10px 0;
                 }
-                .pressml-language-switcher a {
+                .puzzlesync-language-switcher a {
                     text-decoration: none;
                     padding: 5px 8px;
                     margin: 0 2px;
@@ -321,11 +321,11 @@ class Chrmrtns_Pml_Frontend {
                     background: #f1f1f1;
                     transition: all 0.3s ease;
                 }
-                .pressml-language-switcher a:hover {
+                .puzzlesync-language-switcher a:hover {
                     background: #0073aa;
                     color: white;
                 }
-                .pressml-language-switcher .current-lang {
+                .puzzlesync-language-switcher .current-lang {
                     padding: 5px 8px;
                     margin: 0 2px;
                     background: #0073aa;
@@ -333,44 +333,44 @@ class Chrmrtns_Pml_Frontend {
                     border-radius: 3px;
                     font-weight: bold;
                 }
-                .pressml-language-switcher .flag {
+                .puzzlesync-language-switcher .flag {
                     margin-right: 5px;
                 }
 
-                .pressml-language-flags {
+                .puzzlesync-language-flags {
                     display: inline-block;
                     margin: 5px 0;
                 }
-                .pressml-language-flags.flags-block {
+                .puzzlesync-language-flags.flags-block {
                     display: block;
                     text-align: center;
                 }
-                .pressml-language-flags a,
-                .pressml-language-flags span {
+                .puzzlesync-language-flags a,
+                .puzzlesync-language-flags span {
                     text-decoration: none;
                     margin: 0 3px;
                     transition: all 0.3s ease;
                     display: inline-block;
                 }
-                .pressml-language-flags a:hover {
+                .puzzlesync-language-flags a:hover {
                     transform: scale(1.2);
                 }
-                .pressml-language-flags.flag-small a,
-                .pressml-language-flags.flag-small span {
+                .puzzlesync-language-flags.flag-small a,
+                .puzzlesync-language-flags.flag-small span {
                     font-size: 1.2em;
                 }
-                .pressml-language-flags.flag-medium a,
-                .pressml-language-flags.flag-medium span {
+                .puzzlesync-language-flags.flag-medium a,
+                .puzzlesync-language-flags.flag-medium span {
                     font-size: 1.5em;
                 }
-                .pressml-language-flags.flag-large a,
-                .pressml-language-flags.flag-large span {
+                .puzzlesync-language-flags.flag-large a,
+                .puzzlesync-language-flags.flag-large span {
                     font-size: 2em;
                 }
-                .pressml-language-flags .current-flag {
+                .puzzlesync-language-flags .current-flag {
                     opacity: 0.7;
                 }
-                .pressml-language-flags .other-flag {
+                .puzzlesync-language-flags .other-flag {
                     opacity: 1;
                 }
 
@@ -471,12 +471,12 @@ class Chrmrtns_Pml_Frontend {
     /**
      * Add language flags as a custom menu item type
      * This allows users to add it through Appearance > Menus
-     * Usage: Add Custom Link with URL "#pressml-language-flags"
+     * Usage: Add Custom Link with URL "#puzzlesync-language-flags"
      */
     public function modify_menu_for_translations($items, $args) {
         // Check if menu contains a placeholder for language flags
         foreach ($items as $key => $item) {
-            if (isset($item->url) && $item->url === '#pressml-language-flags') {
+            if (isset($item->url) && $item->url === '#puzzlesync-language-flags') {
                 // Replace with actual language flags
                 if (is_singular()) {
                     global $post;

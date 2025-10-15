@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: PressML - Multilingual Content Manager
- * Plugin URI: https://pressml.com
+ * Plugin Name: PuzzleSync - Multilingual Content Manager
+ * Plugin URI: https://puzzlesync.com
  * Description: Advanced multilingual hreflang management system for WordPress with custom database storage
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Chris Martens
  * Author URI: https://chris-martens.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: pressml
+ * Text Domain: puzzlesync
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('CHRMRTNS_PML_VERSION', '1.0.2');
+define('CHRMRTNS_PML_VERSION', '1.0.3');
 define('CHRMRTNS_PML_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('CHRMRTNS_PML_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('CHRMRTNS_PML_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -122,7 +122,7 @@ function chrmrtns_pml_init() {
 // Plugin action links
 add_filter('plugin_action_links_' . CHRMRTNS_PML_PLUGIN_BASENAME, 'chrmrtns_pml_action_links');
 function chrmrtns_pml_action_links($links) {
-    $settings_link = '<a href="' . esc_url(admin_url('options-general.php?page=pressml-settings')) . '">' . esc_html__('Settings', 'pressml') . '</a>';
+    $settings_link = '<a href="' . esc_url(admin_url('options-general.php?page=puzzlesync-settings')) . '">' . esc_html__('Settings', 'puzzlesync') . '</a>';
     array_unshift($links, $settings_link);
     return $links;
 }

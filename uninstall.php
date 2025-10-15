@@ -1,10 +1,10 @@
 <?php
 /**
- * PressML Uninstall
+ * PuzzleSync Uninstall
  *
- * Uninstalling PressML deletes user settings, database tables and post meta data.
+ * Uninstalling PuzzleSync deletes user settings, database tables and post meta data.
  *
- * @package PressML
+ * @package PuzzleSync
  * @since 1.0.0
  */
 

@@ -1,8 +1,8 @@
 <?php
 /**
- * Database operations class for PressML plugin
+ * Database operations class for PuzzleSync plugin
  *
- * @package PressML
+ * @package PuzzleSync
  */
 
 if (!defined('ABSPATH')) {

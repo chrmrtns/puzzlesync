@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin functionality class for PressML plugin
+ * Admin functionality class for PuzzleSync plugin
  *
- * @package PressML
+ * @package PuzzleSync
  */
 
 if (!defined('ABSPATH')) {
@@ -45,7 +45,7 @@ class Chrmrtns_Pml_Admin {
     public function add_meta_boxes() {
         add_meta_box(
             'chrmrtns_pml_hreflang_meta',
-            __('PressML - Multilanguage Settings', 'pressml'),
+            __('PuzzleSync - Multilanguage Settings', 'puzzlesync'),
             array($this, 'render_meta_box'),
             array('post', 'page'),
             'normal',
@@ -83,7 +83,7 @@ class Chrmrtns_Pml_Admin {
                                 <?php echo esc_html($lang['flag']); ?>
                                 <?php
                                 // translators: %s: Language name
-                                echo esc_html(sprintf(__('%s URL:', 'pressml'), $lang['name']));
+                                echo esc_html(sprintf(__('%s URL:', 'puzzlesync'), $lang['name']));
                                 ?>
                             </strong>
                         </label>
@@ -99,40 +99,40 @@ class Chrmrtns_Pml_Admin {
                 <?php endforeach; ?>
 
                 <tr>
-                    <td><label for="chrmrtns_pml_translation_group"><strong><?php esc_html_e('Translation Group:', 'pressml'); ?></strong></label></td>
+                    <td><label for="chrmrtns_pml_translation_group"><strong><?php esc_html_e('Translation Group:', 'puzzlesync'); ?></strong></label></td>
                     <td>
                         <input type="text" id="chrmrtns_pml_translation_group" name="chrmrtns_pml_translation_group"
                                value="<?php echo esc_attr($translation_group); ?>"
                                placeholder="e.g. product-launch-2024" />
-                        <br><small><?php esc_html_e('Groups related translations for automatic linking', 'pressml'); ?></small>
+                        <br><small><?php esc_html_e('Groups related translations for automatic linking', 'puzzlesync'); ?></small>
                         <br><button type="button" id="chrmrtns_pml_sync_group" class="button" style="margin-top: 5px;">
-                            <?php esc_html_e('Sync from Translation Group', 'pressml'); ?>
+                            <?php esc_html_e('Sync from Translation Group', 'puzzlesync'); ?>
                         </button>
                     </td>
                 </tr>
 
                 <tr>
-                    <td><label for="chrmrtns_pml_hreflang_default"><strong><?php esc_html_e('x-default Language:', 'pressml'); ?></strong></label></td>
+                    <td><label for="chrmrtns_pml_hreflang_default"><strong><?php esc_html_e('x-default Language:', 'puzzlesync'); ?></strong></label></td>
                     <td>
                         <select id="chrmrtns_pml_hreflang_default" name="chrmrtns_pml_hreflang_default">
-                            <option value=""><?php esc_html_e('Automatic', 'pressml'); ?></option>
+                            <option value=""><?php esc_html_e('Automatic', 'puzzlesync'); ?></option>
                             <?php foreach ($supported_languages as $lang): ?>
                             <option value="<?php echo esc_attr($lang['code']); ?>" <?php selected($default_lang, $lang['code']); ?>>
                                 <?php echo esc_html($lang['flag'] . ' ' . $lang['name']); ?>
                             </option>
                             <?php endforeach; ?>
                         </select>
-                        <br><small><?php esc_html_e('Default language for international users', 'pressml'); ?></small>
+                        <br><small><?php esc_html_e('Default language for international users', 'puzzlesync'); ?></small>
                     </td>
                 </tr>
             </table>
 
             <div class="chrmrtns-pml-info-box">
-                <h4 style="margin-top: 0;"><?php esc_html_e('Automatic Linking', 'pressml'); ?></h4>
-                <p><?php echo wp_kses_post(__('<strong>Alternative to manual URLs:</strong> Use categories (language names) + Translation Groups for automatic linking.', 'pressml')); ?></p>
-                <p><?php esc_html_e('For each language, create categories or tags with the language name (e.g., "english", "français", "deutsch") or version tags (e.g., "english-version", "français-version").', 'pressml'); ?></p>
-                <p><?php echo wp_kses_post(__('<strong>Priority:</strong> Database entries → Custom Fields → Categories + Translation Groups', 'pressml')); ?></p>
-                <p><?php echo wp_kses_post(__('<strong>Single language posts:</strong> Leave empty - no hreflang tags will be set!', 'pressml')); ?></p>
+                <h4 style="margin-top: 0;"><?php esc_html_e('Automatic Linking', 'puzzlesync'); ?></h4>
+                <p><?php echo wp_kses_post(__('<strong>Alternative to manual URLs:</strong> Use categories (language names) + Translation Groups for automatic linking.', 'puzzlesync')); ?></p>
+                <p><?php esc_html_e('For each language, create categories or tags with the language name (e.g., "english", "français", "deutsch") or version tags (e.g., "english-version", "français-version").', 'puzzlesync'); ?></p>
+                <p><?php echo wp_kses_post(__('<strong>Priority:</strong> Database entries → Custom Fields → Categories + Translation Groups', 'puzzlesync')); ?></p>
+                <p><?php echo wp_kses_post(__('<strong>Single language posts:</strong> Leave empty - no hreflang tags will be set!', 'puzzlesync')); ?></p>
             </div>
         </div>
         <?php
@@ -377,48 +377,48 @@ class Chrmrtns_Pml_Admin {
      */
     public function add_admin_menu() {
         add_menu_page(
-            __('PressML', 'pressml'),
-            __('PressML', 'pressml'),
+            __('PuzzleSync', 'puzzlesync'),
+            __('PuzzleSync', 'puzzlesync'),
             'manage_options',
-            'pressml-settings',
+            'puzzlesync-settings',
             array($this, 'render_settings_page'),
             $this->get_menu_icon(),
             30
         );
 
         add_submenu_page(
-            'pressml-settings',
-            __('Validator', 'pressml'),
-            __('Validator', 'pressml'),
+            'puzzlesync-settings',
+            __('Validator', 'puzzlesync'),
+            __('Validator', 'puzzlesync'),
             'manage_options',
-            'pressml-validator',
+            'puzzlesync-validator',
             array($this, 'render_validator_page')
         );
 
         add_submenu_page(
-            'pressml-settings',
-            __('Languages', 'pressml'),
-            __('Languages', 'pressml'),
+            'puzzlesync-settings',
+            __('Languages', 'puzzlesync'),
+            __('Languages', 'puzzlesync'),
             'manage_options',
-            'pressml-languages',
+            'puzzlesync-languages',
             array($this, 'render_languages_page')
         );
 
         add_submenu_page(
-            'pressml-settings',
-            __('Statistics', 'pressml'),
-            __('Statistics', 'pressml'),
+            'puzzlesync-settings',
+            __('Statistics', 'puzzlesync'),
+            __('Statistics', 'puzzlesync'),
             'manage_options',
-            'pressml-statistics',
+            'puzzlesync-statistics',
             array($this, 'render_statistics_page')
         );
 
         add_submenu_page(
-            'pressml-settings',
-            __('How to Use', 'pressml'),
-            __('How to Use', 'pressml'),
+            'puzzlesync-settings',
+            __('How to Use', 'puzzlesync'),
+            __('How to Use', 'puzzlesync'),
             'manage_options',
-            'pressml-help',
+            'puzzlesync-help',
             array($this, 'render_help_page')
         );
     }
@@ -439,7 +439,7 @@ class Chrmrtns_Pml_Admin {
             update_option('chrmrtns_pml_auto_menu_flags', isset($_POST['chrmrtns_pml_auto_menu_flags']));
             update_option('chrmrtns_pml_menu_flags_display', isset($_POST['chrmrtns_pml_menu_flags_display']) ? sanitize_text_field(wp_unslash($_POST['chrmrtns_pml_menu_flags_display'])) : 'row');
 
-            echo '<div class="notice notice-success"><p>' . esc_html__('Settings saved!', 'pressml') . '</p></div>';
+            echo '<div class="notice notice-success"><p>' . esc_html__('Settings saved!', 'puzzlesync') . '</p></div>';
         }
 
         $enabled = get_option('chrmrtns_pml_enabled', true);
@@ -450,76 +450,76 @@ class Chrmrtns_Pml_Admin {
         $menu_flags_display = get_option('chrmrtns_pml_menu_flags_display', 'row');
         ?>
         <div class="wrap">
-            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('PressML Settings', 'pressml'); ?></h1>
+            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('PuzzleSync Settings', 'puzzlesync'); ?></h1>
 
             <form method="post" action="">
                 <?php wp_nonce_field('chrmrtns_pml_settings', 'chrmrtns_pml_settings_nonce'); ?>
 
                 <table class="form-table">
                     <tr>
-                        <th scope="row"><?php esc_html_e('Enable PressML', 'pressml'); ?></th>
+                        <th scope="row"><?php esc_html_e('Enable PuzzleSync', 'puzzlesync'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="chrmrtns_pml_enabled" value="1" <?php checked($enabled); ?> />
-                                <?php esc_html_e('Enable hreflang tags output', 'pressml'); ?>
+                                <?php esc_html_e('Enable hreflang tags output', 'puzzlesync'); ?>
                             </label>
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row"><?php esc_html_e('Auto-detect Language', 'pressml'); ?></th>
+                        <th scope="row"><?php esc_html_e('Auto-detect Language', 'puzzlesync'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="chrmrtns_pml_auto_detect" value="1" <?php checked($auto_detect); ?> />
-                                <?php esc_html_e('Automatically detect language from categories and tags', 'pressml'); ?>
+                                <?php esc_html_e('Automatically detect language from categories and tags', 'puzzlesync'); ?>
                             </label>
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row"><?php esc_html_e('JSON-LD Output', 'pressml'); ?></th>
+                        <th scope="row"><?php esc_html_e('JSON-LD Output', 'puzzlesync'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="chrmrtns_pml_enable_json_ld" value="1" <?php checked($enable_json_ld); ?> />
-                                <?php esc_html_e('Add structured data for multilingual content', 'pressml'); ?>
+                                <?php esc_html_e('Add structured data for multilingual content', 'puzzlesync'); ?>
                             </label>
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row"><?php esc_html_e('Show Flags', 'pressml'); ?></th>
+                        <th scope="row"><?php esc_html_e('Show Flags', 'puzzlesync'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="chrmrtns_pml_show_flags" value="1" <?php checked($show_flags); ?> />
-                                <?php esc_html_e('Show language flags in admin columns', 'pressml'); ?>
+                                <?php esc_html_e('Show language flags in admin columns', 'puzzlesync'); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e('Automatic Menu Flags', 'pressml'); ?></th>
+                        <th scope="row"><?php esc_html_e('Automatic Menu Flags', 'puzzlesync'); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" name="chrmrtns_pml_auto_menu_flags" value="1" <?php checked($auto_menu_flags); ?> />
-                                <?php esc_html_e('Automatically add language flags to the end of navigation menus', 'pressml'); ?>
+                                <?php esc_html_e('Automatically add language flags to the end of navigation menus', 'puzzlesync'); ?>
                             </label>
                             <p class="description">
-                                <?php esc_html_e('When enabled, language flags will automatically appear at the end of navigation menus. When disabled, you can manually add them using Custom Links with URL "#pressml-language-flags".', 'pressml'); ?>
+                                <?php esc_html_e('When enabled, language flags will automatically appear at the end of navigation menus. When disabled, you can manually add them using Custom Links with URL "#puzzlesync-language-flags".', 'puzzlesync'); ?>
                             </p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php esc_html_e('Menu Flags Display', 'pressml'); ?></th>
+                        <th scope="row"><?php esc_html_e('Menu Flags Display', 'puzzlesync'); ?></th>
                         <td>
                             <select name="chrmrtns_pml_menu_flags_display">
                                 <option value="row" <?php selected($menu_flags_display, 'row'); ?>>
-                                    <?php esc_html_e('Row (side by side)', 'pressml'); ?>
+                                    <?php esc_html_e('Row (side by side)', 'puzzlesync'); ?>
                                 </option>
                                 <option value="column" <?php selected($menu_flags_display, 'column'); ?>>
-                                    <?php esc_html_e('Column (stacked)', 'pressml'); ?>
+                                    <?php esc_html_e('Column (stacked)', 'puzzlesync'); ?>
                                 </option>
                             </select>
                             <p class="description">
-                                <?php esc_html_e('Choose how language flags appear in navigation menus.', 'pressml'); ?>
+                                <?php esc_html_e('Choose how language flags appear in navigation menus.', 'puzzlesync'); ?>
                             </p>
                         </td>
                     </tr>
@@ -537,7 +537,7 @@ class Chrmrtns_Pml_Admin {
     public function render_validator_page() {
         ?>
         <div class="wrap">
-            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('PressML Validator', 'pressml'); ?></h1>
+            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('PuzzleSync Validator', 'puzzlesync'); ?></h1>
 
             <?php
             if (isset($_POST['validate_hreflang']) &&
@@ -547,10 +547,10 @@ class Chrmrtns_Pml_Admin {
                 $issues = $this->db->validate_hreflang_urls();
 
                 if (empty($issues)) {
-                    echo '<div class="notice notice-success"><p>' . esc_html__('All hreflang configurations are valid!', 'pressml') . '</p></div>';
+                    echo '<div class="notice notice-success"><p>' . esc_html__('All hreflang configurations are valid!', 'puzzlesync') . '</p></div>';
                 } else {
                     // translators: %d: Number of issues found
-                    echo '<div class="notice notice-warning"><p>' . esc_html(sprintf(__('Found %d issues:', 'pressml'), count($issues))) . '</p>';
+                    echo '<div class="notice notice-warning"><p>' . esc_html(sprintf(__('Found %d issues:', 'puzzlesync'), count($issues))) . '</p>';
                     echo '<ul>';
                     foreach ($issues as $issue) {
                         echo '<li>' . esc_html($issue) . '</li>';
@@ -565,16 +565,16 @@ class Chrmrtns_Pml_Admin {
                 current_user_can('manage_options')) {
                 $deleted = $this->db->cleanup_orphaned_entries();
                 // translators: %d: Number of orphaned entries cleaned up
-                echo '<div class="notice notice-success"><p>' . esc_html(sprintf(__('Cleaned up %d orphaned entries', 'pressml'), $deleted)) . '</p></div>';
+                echo '<div class="notice notice-success"><p>' . esc_html(sprintf(__('Cleaned up %d orphaned entries', 'puzzlesync'), $deleted)) . '</p></div>';
             }
             ?>
 
             <form method="post">
                 <?php wp_nonce_field('chrmrtns_pml_validator', 'chrmrtns_pml_validator_nonce'); ?>
-                <p><?php esc_html_e('This tool validates all hreflang configurations across your site.', 'pressml'); ?></p>
+                <p><?php esc_html_e('This tool validates all hreflang configurations across your site.', 'puzzlesync'); ?></p>
                 <p class="submit">
-                    <input type="submit" name="validate_hreflang" class="button-primary" value="<?php esc_attr_e('Run Validation', 'pressml'); ?>" />
-                    <input type="submit" name="cleanup_orphaned" class="button" value="<?php esc_attr_e('Clean Orphaned Entries', 'pressml'); ?>" />
+                    <input type="submit" name="validate_hreflang" class="button-primary" value="<?php esc_attr_e('Run Validation', 'puzzlesync'); ?>" />
+                    <input type="submit" name="cleanup_orphaned" class="button" value="<?php esc_attr_e('Clean Orphaned Entries', 'puzzlesync'); ?>" />
                 </p>
             </form>
         </div>
@@ -599,7 +599,7 @@ class Chrmrtns_Pml_Admin {
                 echo '<div class="notice notice-success"><p>' .
                     esc_html(sprintf(
                         // translators: %1$d: Number of entries deleted, %2$d: Post ID
-                        __('Deleted %1$d hreflang entries for post ID %2$d', 'pressml'),
+                        __('Deleted %1$d hreflang entries for post ID %2$d', 'puzzlesync'),
                         $deleted,
                         $post_id
                     )) .
@@ -610,51 +610,51 @@ class Chrmrtns_Pml_Admin {
         $stats = $this->db->get_statistics();
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e('PressML Statistics', 'pressml'); ?></h1>
+            <h1><?php esc_html_e('PuzzleSync Statistics', 'puzzlesync'); ?></h1>
 
             <div class="chrmrtns-pml-card">
-                <h2><?php esc_html_e('Overview', 'pressml'); ?></h2>
+                <h2><?php esc_html_e('Overview', 'puzzlesync'); ?></h2>
                 <table class="form-table">
                     <tr>
-                        <th><?php esc_html_e('Total Entries:', 'pressml'); ?></th>
+                        <th><?php esc_html_e('Total Entries:', 'puzzlesync'); ?></th>
                         <td><?php echo esc_html($stats['total_entries']); ?></td>
                     </tr>
                     <tr>
-                        <th><?php esc_html_e('Posts with Hreflang:', 'pressml'); ?></th>
+                        <th><?php esc_html_e('Posts with Hreflang:', 'puzzlesync'); ?></th>
                         <td><?php echo esc_html($stats['total_posts']); ?></td>
                     </tr>
                     <tr>
-                        <th><?php esc_html_e('Translation Groups:', 'pressml'); ?></th>
+                        <th><?php esc_html_e('Translation Groups:', 'puzzlesync'); ?></th>
                         <td><?php echo esc_html($stats['total_groups']); ?></td>
                     </tr>
                 </table>
             </div>
 
             <div class="chrmrtns-pml-card">
-                <h2><?php esc_html_e('Languages', 'pressml'); ?></h2>
+                <h2><?php esc_html_e('Languages', 'puzzlesync'); ?></h2>
                 <table class="form-table">
                     <?php foreach ($stats['languages'] as $lang => $count): ?>
                     <tr>
                         <th><?php echo esc_html(strtoupper($lang)); ?>:</th>
-                        <td><?php echo esc_html($count); ?> <?php esc_html_e('entries', 'pressml'); ?></td>
+                        <td><?php echo esc_html($count); ?> <?php esc_html_e('entries', 'puzzlesync'); ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
 
             <div class="chrmrtns-pml-card">
-                <h2><?php esc_html_e('Posts/Pages with Hreflang Entries', 'pressml'); ?></h2>
-                <p><?php esc_html_e('All posts and pages that currently have hreflang entries in the database:', 'pressml'); ?></p>
+                <h2><?php esc_html_e('Posts/Pages with Hreflang Entries', 'puzzlesync'); ?></h2>
+                <p><?php esc_html_e('All posts and pages that currently have hreflang entries in the database:', 'puzzlesync'); ?></p>
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php esc_html_e('ID', 'pressml'); ?></th>
-                            <th><?php esc_html_e('Title', 'pressml'); ?></th>
-                            <th><?php esc_html_e('Type', 'pressml'); ?></th>
-                            <th><?php esc_html_e('Status', 'pressml'); ?></th>
-                            <th><?php esc_html_e('Languages', 'pressml'); ?></th>
-                            <th><?php esc_html_e('Translation Group', 'pressml'); ?></th>
-                            <th><?php esc_html_e('Actions', 'pressml'); ?></th>
+                            <th><?php esc_html_e('ID', 'puzzlesync'); ?></th>
+                            <th><?php esc_html_e('Title', 'puzzlesync'); ?></th>
+                            <th><?php esc_html_e('Type', 'puzzlesync'); ?></th>
+                            <th><?php esc_html_e('Status', 'puzzlesync'); ?></th>
+                            <th><?php esc_html_e('Languages', 'puzzlesync'); ?></th>
+                            <th><?php esc_html_e('Translation Group', 'puzzlesync'); ?></th>
+                            <th><?php esc_html_e('Actions', 'puzzlesync'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -673,9 +673,9 @@ class Chrmrtns_Pml_Admin {
                                 echo '<td>' . esc_html($post->post_type) . '</td>';
                                 echo '<td>' . esc_html($post->post_status) . '</td>';
                             } else {
-                                echo '<td><em>' . esc_html__('Post not found', 'pressml') . '</em></td>';
+                                echo '<td><em>' . esc_html__('Post not found', 'puzzlesync') . '</em></td>';
                                 echo '<td>-</td>';
-                                echo '<td>' . esc_html__('deleted', 'pressml') . '</td>';
+                                echo '<td>' . esc_html__('deleted', 'puzzlesync') . '</td>';
                             }
 
                             // Show languages
@@ -690,7 +690,7 @@ class Chrmrtns_Pml_Admin {
                                     $flags[] = strtoupper($item->language_code);
                                 }
                             }
-                            echo esc_html(implode(', ', $flags)) . ' (' . count($hreflang_data) . ' ' . esc_html__('entries', 'pressml') . ')';
+                            echo esc_html(implode(', ', $flags)) . ' (' . count($hreflang_data) . ' ' . esc_html__('entries', 'puzzlesync') . ')';
                             echo '</td>';
 
                             // Translation group
@@ -699,9 +699,9 @@ class Chrmrtns_Pml_Admin {
                             // Actions
                             echo '<td>';
                             if ($post) {
-                                echo '<a href="' . esc_url(get_edit_post_link($post_id)) . '" class="button button-small">' . esc_html__('Edit', 'pressml') . '</a> ';
+                                echo '<a href="' . esc_url(get_edit_post_link($post_id)) . '" class="button button-small">' . esc_html__('Edit', 'puzzlesync') . '</a> ';
                             }
-                            echo '<a href="' . esc_url(wp_nonce_url(admin_url('admin.php?page=pressml-statistics&action=delete_hreflang&post_id=' . $post_id), 'delete_hreflang_' . $post_id)) . '" class="button button-small button-link-delete" onclick="return confirm(\'' . esc_js(__('Are you sure you want to delete all hreflang entries for this post?', 'pressml')) . '\')">' . esc_html__('Delete Hreflang', 'pressml') . '</a>';
+                            echo '<a href="' . esc_url(wp_nonce_url(admin_url('admin.php?page=puzzlesync-statistics&action=delete_hreflang&post_id=' . $post_id), 'delete_hreflang_' . $post_id)) . '" class="button button-small button-link-delete" onclick="return confirm(\'' . esc_js(__('Are you sure you want to delete all hreflang entries for this post?', 'puzzlesync')) . '\')">' . esc_html__('Delete Hreflang', 'puzzlesync') . '</a>';
                             echo '</td>';
                             echo '</tr>';
                         }
@@ -737,7 +737,7 @@ class Chrmrtns_Pml_Admin {
                     }
                 }
                 update_option('chrmrtns_pml_languages', $languages);
-                echo '<div class="notice notice-success"><p>' . esc_html__('Languages saved!', 'pressml') . '</p></div>';
+                echo '<div class="notice notice-success"><p>' . esc_html__('Languages saved!', 'puzzlesync') . '</p></div>';
             }
         }
 
@@ -749,11 +749,11 @@ class Chrmrtns_Pml_Admin {
 
         ?>
         <div class="wrap">
-            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('Language Management', 'pressml'); ?></h1>
+            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('Language Management', 'puzzlesync'); ?></h1>
 
             <div class="chrmrtns-pml-card">
-                <h2><?php esc_html_e('Supported Languages', 'pressml'); ?></h2>
-                <p><?php esc_html_e('Add or remove languages for your multilingual site. Each language needs a language code (like "en" or "de"), a name, and a flag emoji.', 'pressml'); ?></p>
+                <h2><?php esc_html_e('Supported Languages', 'puzzlesync'); ?></h2>
+                <p><?php esc_html_e('Add or remove languages for your multilingual site. Each language needs a language code (like "en" or "de"), a name, and a flag emoji.', 'puzzlesync'); ?></p>
 
                 <form method="post" action="">
                     <?php wp_nonce_field('chrmrtns_pml_languages', 'chrmrtns_pml_languages_nonce'); ?>
@@ -761,10 +761,10 @@ class Chrmrtns_Pml_Admin {
                     <table class="wp-list-table widefat fixed striped" id="chrmrtns-pml-languages-table">
                         <thead>
                             <tr>
-                                <th style="width: 80px;"><?php esc_html_e('Code', 'pressml'); ?></th>
-                                <th><?php esc_html_e('Language Name', 'pressml'); ?></th>
-                                <th style="width: 80px;"><?php esc_html_e('Flag', 'pressml'); ?></th>
-                                <th style="width: 80px;"><?php esc_html_e('Actions', 'pressml'); ?></th>
+                                <th style="width: 80px;"><?php esc_html_e('Code', 'puzzlesync'); ?></th>
+                                <th><?php esc_html_e('Language Name', 'puzzlesync'); ?></th>
+                                <th style="width: 80px;"><?php esc_html_e('Flag', 'puzzlesync'); ?></th>
+                                <th style="width: 80px;"><?php esc_html_e('Actions', 'puzzlesync'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -787,7 +787,7 @@ class Chrmrtns_Pml_Admin {
                                 </td>
                                 <td>
                                     <button type="button" class="button chrmrtns-pml-remove-language" <?php echo count($languages) <= 1 ? 'disabled' : ''; ?>>
-                                        <?php esc_html_e('Remove', 'pressml'); ?>
+                                        <?php esc_html_e('Remove', 'puzzlesync'); ?>
                                     </button>
                                 </td>
                             </tr>
@@ -797,7 +797,7 @@ class Chrmrtns_Pml_Admin {
 
                     <p>
                         <button type="button" class="button" id="chrmrtns-pml-add-language">
-                            <?php esc_html_e('Add Language', 'pressml'); ?>
+                            <?php esc_html_e('Add Language', 'puzzlesync'); ?>
                         </button>
                     </p>
 
@@ -806,13 +806,13 @@ class Chrmrtns_Pml_Admin {
             </div>
 
             <div class="chrmrtns-pml-card">
-                <h2><?php esc_html_e('Common Language Codes & Flags', 'pressml'); ?></h2>
-                <p><?php esc_html_e('Here are some common language codes and their corresponding flag emojis:', 'pressml'); ?></p>
+                <h2><?php esc_html_e('Common Language Codes & Flags', 'puzzlesync'); ?></h2>
+                <p><?php esc_html_e('Here are some common language codes and their corresponding flag emojis:', 'puzzlesync'); ?></p>
                 <table class="form-table">
                     <tr>
-                        <th><?php esc_html_e('Language', 'pressml'); ?></th>
-                        <th><?php esc_html_e('Code', 'pressml'); ?></th>
-                        <th><?php esc_html_e('Flag', 'pressml'); ?></th>
+                        <th><?php esc_html_e('Language', 'puzzlesync'); ?></th>
+                        <th><?php esc_html_e('Code', 'puzzlesync'); ?></th>
+                        <th><?php esc_html_e('Flag', 'puzzlesync'); ?></th>
                     </tr>
                     <tr><td>English</td><td>en</td><td>🇺🇸</td></tr>
                     <tr><td>Deutsch</td><td>de</td><td>🇩🇪</td></tr>
@@ -857,7 +857,7 @@ class Chrmrtns_Pml_Admin {
      * Add hreflang column to post list
      */
     public function add_hreflang_column($columns) {
-        $columns['chrmrtns_pml_translations'] = esc_html__('Translations', 'pressml');
+        $columns['chrmrtns_pml_translations'] = esc_html__('Translations', 'puzzlesync');
         return $columns;
     }
 
@@ -869,7 +869,7 @@ class Chrmrtns_Pml_Admin {
             $hreflang_data = $this->db->get_hreflang_by_post($post_id);
 
             if (empty($hreflang_data)) {
-                echo '<span style="color: #999;">' . esc_html__('Single language', 'pressml') . '</span>';
+                echo '<span style="color: #999;">' . esc_html__('Single language', 'puzzlesync') . '</span>';
             } else {
                 $show_flags = get_option('chrmrtns_pml_show_flags', true);
                 $flags = array();
@@ -899,17 +899,17 @@ class Chrmrtns_Pml_Admin {
     public function enqueue_admin_assets($hook) {
         $version = defined('CHRMRTNS_PML_VERSION') ? CHRMRTNS_PML_VERSION : '1.0.0';
 
-        // Enqueue admin CSS on all PressML pages
-        if (strpos($hook, 'pressml') !== false || in_array($hook, array('post.php', 'post-new.php'))) {
+        // Enqueue admin CSS on all PuzzleSync pages
+        if (strpos($hook, 'puzzlesync') !== false || in_array($hook, array('post.php', 'post-new.php'))) {
             wp_enqueue_style(
-                'pressml-admin-css',
+                'puzzlesync-admin-css',
                 plugin_dir_url(dirname(__FILE__)) . 'assets/css/admin.css',
                 array(),
                 $version
             );
 
-            // Add additional inline styles for PressML settings pages
-            if (strpos($hook, 'pressml') !== false) {
+            // Add additional inline styles for PuzzleSync settings pages
+            if (strpos($hook, 'puzzlesync') !== false) {
                 $inline_css = '
                     .chrmrtns-pml-card {
                         position: relative;
@@ -929,7 +929,7 @@ class Chrmrtns_Pml_Admin {
                         padding: 12px;
                     }
                 ';
-                wp_add_inline_style('pressml-admin-css', $inline_css);
+                wp_add_inline_style('puzzlesync-admin-css', $inline_css);
             }
         }
 
@@ -938,7 +938,7 @@ class Chrmrtns_Pml_Admin {
             global $post;
 
             wp_enqueue_script(
-                'pressml-meta-box-js',
+                'puzzlesync-meta-box-js',
                 plugin_dir_url(dirname(__FILE__)) . 'assets/js/meta-box.js',
                 array('jquery'),
                 $version,
@@ -946,26 +946,26 @@ class Chrmrtns_Pml_Admin {
             );
 
             // Localize script for meta box
-            wp_localize_script('pressml-meta-box-js', 'pressmlMetaBox', array(
+            wp_localize_script('puzzlesync-meta-box-js', 'pressmlMetaBox', array(
                 'postId' => isset($post->ID) ? $post->ID : 0,
                 'nonce' => wp_create_nonce('chrmrtns_pml_sync'),
-                'alertEnterGroup' => __('Please enter a translation group first!', 'pressml'),
-                'textSyncing' => __('Syncing...', 'pressml'),
-                'textSyncSuccess' => __('Translation URLs synchronized!', 'pressml'),
-                'textFieldsUpdated' => __('fields updated', 'pressml'),
-                'alertNoFields' => __('No matching URL fields found to update', 'pressml'),
-                'alertSyncFailed' => __('Sync failed', 'pressml'),
-                'alertAjaxError' => __('AJAX error occurred', 'pressml'),
-                'textSyncButton' => __('Sync from Translation Group', 'pressml')
+                'alertEnterGroup' => __('Please enter a translation group first!', 'puzzlesync'),
+                'textSyncing' => __('Syncing...', 'puzzlesync'),
+                'textSyncSuccess' => __('Translation URLs synchronized!', 'puzzlesync'),
+                'textFieldsUpdated' => __('fields updated', 'puzzlesync'),
+                'alertNoFields' => __('No matching URL fields found to update', 'puzzlesync'),
+                'alertSyncFailed' => __('Sync failed', 'puzzlesync'),
+                'alertAjaxError' => __('AJAX error occurred', 'puzzlesync'),
+                'textSyncButton' => __('Sync from Translation Group', 'puzzlesync')
             ));
         }
 
         // Enqueue settings page JavaScript
-        if (strpos($hook, 'pressml') !== false && strpos($hook, 'settings') !== false) {
+        if (strpos($hook, 'puzzlesync') !== false && strpos($hook, 'settings') !== false) {
             $languages = get_option('chrmrtns_pml_languages', array());
 
             wp_enqueue_script(
-                'pressml-settings-js',
+                'puzzlesync-settings-js',
                 plugin_dir_url(dirname(__FILE__)) . 'assets/js/settings.js',
                 array('jquery'),
                 $version,
@@ -973,9 +973,9 @@ class Chrmrtns_Pml_Admin {
             );
 
             // Localize script for settings page
-            wp_localize_script('pressml-settings-js', 'pressmlSettings', array(
+            wp_localize_script('puzzlesync-settings-js', 'pressmlSettings', array(
                 'languageCount' => count($languages),
-                'textRemove' => __('Remove', 'pressml')
+                'textRemove' => __('Remove', 'puzzlesync')
             ));
         }
     }
@@ -989,14 +989,14 @@ class Chrmrtns_Pml_Admin {
         }
 
         if (!isset($_POST['translation_group']) || !isset($_POST['post_id'])) {
-            wp_send_json_error(__('Missing required parameters', 'pressml'));
+            wp_send_json_error(__('Missing required parameters', 'puzzlesync'));
         }
 
         $translation_group = sanitize_text_field(wp_unslash($_POST['translation_group']));
         $current_post_id = intval(wp_unslash($_POST['post_id']));
 
         if (empty($translation_group)) {
-            wp_send_json_error(__('Translation group is empty', 'pressml'));
+            wp_send_json_error(__('Translation group is empty', 'puzzlesync'));
         }
 
         // Get related posts from translation group
@@ -1056,7 +1056,7 @@ class Chrmrtns_Pml_Admin {
             }
 
             if (empty($urls)) {
-                wp_send_json_error(__('No related translations found', 'pressml'));
+                wp_send_json_error(__('No related translations found', 'puzzlesync'));
             }
 
             wp_send_json_success($urls);
@@ -1081,7 +1081,7 @@ class Chrmrtns_Pml_Admin {
         }
 
         if (!isset($_POST['post_id'])) {
-            wp_send_json_error(__('Missing post ID parameter', 'pressml'));
+            wp_send_json_error(__('Missing post ID parameter', 'puzzlesync'));
         }
 
         $post_id = intval(wp_unslash($_POST['post_id']));
@@ -1092,12 +1092,12 @@ class Chrmrtns_Pml_Admin {
         foreach ($hreflang_data as $item) {
             if (!filter_var($item->url, FILTER_VALIDATE_URL)) {
                 // translators: %s: Language code
-                $issues[] = sprintf(__('Invalid URL for language %s', 'pressml'), $item->language_code);
+                $issues[] = sprintf(__('Invalid URL for language %s', 'puzzlesync'), $item->language_code);
             }
         }
 
         if (empty($issues)) {
-            wp_send_json_success(__('All URLs are valid', 'pressml'));
+            wp_send_json_success(__('All URLs are valid', 'puzzlesync'));
         } else {
             wp_send_json_error($issues);
         }
@@ -1109,132 +1109,132 @@ class Chrmrtns_Pml_Admin {
     public function render_help_page() {
         ?>
         <div class="wrap">
-            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('How to Use PressML', 'pressml'); ?></h1>
+            <h1><?php echo wp_kses_post($this->get_header_logo()); ?><?php esc_html_e('How to Use PuzzleSync', 'puzzlesync'); ?></h1>
 
             <div style="max-width: 100%;">
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Getting Started', 'pressml'); ?></h2>
-                    <p><?php esc_html_e('PressML helps you manage multilingual content with proper hreflang tags. Follow these steps to set up your multilingual site:', 'pressml'); ?></p>
+                    <h2><?php esc_html_e('Getting Started', 'puzzlesync'); ?></h2>
+                    <p><?php esc_html_e('PuzzleSync helps you manage multilingual content with proper hreflang tags. Follow these steps to set up your multilingual site:', 'puzzlesync'); ?></p>
 
                     <ol>
-                        <li><strong><?php esc_html_e('Create categories for languages:', 'pressml'); ?></strong> <?php esc_html_e('Create categories named "English" and "German" (or "english" and "german").', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('Assign posts to language categories:', 'pressml'); ?></strong> <?php esc_html_e('When creating/editing posts, assign them to the appropriate language category.', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('Link translations together:', 'pressml'); ?></strong> <?php esc_html_e('Use the PressML meta box in the post editor to link related translations.', 'pressml'); ?></li>
+                        <li><strong><?php esc_html_e('Create categories for languages:', 'puzzlesync'); ?></strong> <?php esc_html_e('Create categories named "English" and "German" (or "english" and "german").', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('Assign posts to language categories:', 'puzzlesync'); ?></strong> <?php esc_html_e('When creating/editing posts, assign them to the appropriate language category.', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('Link translations together:', 'puzzlesync'); ?></strong> <?php esc_html_e('Use the PuzzleSync meta box in the post editor to link related translations.', 'puzzlesync'); ?></li>
                     </ol>
                 </div>
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Using the Post Editor', 'pressml'); ?></h2>
-                    <p><?php esc_html_e('When editing a post or page, you\'ll find the PressML meta box below the editor:', 'pressml'); ?></p>
+                    <h2><?php esc_html_e('Using the Post Editor', 'puzzlesync'); ?></h2>
+                    <p><?php esc_html_e('When editing a post or page, you\'ll find the PuzzleSync meta box below the editor:', 'puzzlesync'); ?></p>
 
-                    <h3><?php esc_html_e('Meta Box Fields:', 'pressml'); ?></h3>
+                    <h3><?php esc_html_e('Meta Box Fields:', 'puzzlesync'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_html_e('English URL:', 'pressml'); ?></strong> <?php esc_html_e('Enter the URL of the English version of this content', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('German URL:', 'pressml'); ?></strong> <?php esc_html_e('Enter the URL of the German version of this content', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('Translation Group:', 'pressml'); ?></strong> <?php esc_html_e('A unique identifier to group related translations together', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('Set as Default Language:', 'pressml'); ?></strong> <?php esc_html_e('Check this if this page should be the default (x-default) version', 'pressml'); ?></li>
+                        <li><strong><?php esc_html_e('English URL:', 'puzzlesync'); ?></strong> <?php esc_html_e('Enter the URL of the English version of this content', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('German URL:', 'puzzlesync'); ?></strong> <?php esc_html_e('Enter the URL of the German version of this content', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('Translation Group:', 'puzzlesync'); ?></strong> <?php esc_html_e('A unique identifier to group related translations together', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('Set as Default Language:', 'puzzlesync'); ?></strong> <?php esc_html_e('Check this if this page should be the default (x-default) version', 'puzzlesync'); ?></li>
                     </ul>
                 </div>
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Language Detection', 'pressml'); ?></h2>
-                    <p><?php esc_html_e('PressML detects the language of your content using:', 'pressml'); ?></p>
+                    <h2><?php esc_html_e('Language Detection', 'puzzlesync'); ?></h2>
+                    <p><?php esc_html_e('PuzzleSync detects the language of your content using:', 'puzzlesync'); ?></p>
 
                     <ul>
-                        <li><strong><?php esc_html_e('Categories:', 'pressml'); ?></strong> "english", "English", "german", "German"</li>
-                        <li><strong><?php esc_html_e('Tags:', 'pressml'); ?></strong> "english-version", "English-version", "german-version", "German-version"</li>
-                        <li><strong><?php esc_html_e('Site Locale:', 'pressml'); ?></strong> <?php esc_html_e('Falls back to your WordPress locale setting', 'pressml'); ?></li>
+                        <li><strong><?php esc_html_e('Categories:', 'puzzlesync'); ?></strong> "english", "English", "german", "German"</li>
+                        <li><strong><?php esc_html_e('Tags:', 'puzzlesync'); ?></strong> "english-version", "English-version", "german-version", "German-version"</li>
+                        <li><strong><?php esc_html_e('Site Locale:', 'puzzlesync'); ?></strong> <?php esc_html_e('Falls back to your WordPress locale setting', 'puzzlesync'); ?></li>
                     </ul>
                 </div>
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Using Shortcodes', 'pressml'); ?></h2>
-                    <p><?php esc_html_e('Add language switching functionality to your posts and pages:', 'pressml'); ?></p>
+                    <h2><?php esc_html_e('Using Shortcodes', 'puzzlesync'); ?></h2>
+                    <p><?php esc_html_e('Add language switching functionality to your posts and pages:', 'puzzlesync'); ?></p>
 
-                    <h3><?php esc_html_e('Available Shortcodes:', 'pressml'); ?></h3>
+                    <h3><?php esc_html_e('Available Shortcodes:', 'puzzlesync'); ?></h3>
 
                     <h4><code>[pressml_language_flags]</code></h4>
-                    <p><?php esc_html_e('Displays flag icons that link to other language versions.', 'pressml'); ?></p>
-                    <p><strong><?php esc_html_e('Parameters:', 'pressml'); ?></strong></p>
+                    <p><?php esc_html_e('Displays flag icons that link to other language versions.', 'puzzlesync'); ?></p>
+                    <p><strong><?php esc_html_e('Parameters:', 'puzzlesync'); ?></strong></p>
                     <ul>
-                        <li><code>size="small|medium|large"</code> - <?php esc_html_e('Flag size', 'pressml'); ?></li>
-                        <li><code>style="inline|block"</code> - <?php esc_html_e('Display style', 'pressml'); ?></li>
-                        <li><code>show_current="true|false"</code> - <?php esc_html_e('Show current language flag', 'pressml'); ?></li>
-                        <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'pressml'); ?></li>
+                        <li><code>size="small|medium|large"</code> - <?php esc_html_e('Flag size', 'puzzlesync'); ?></li>
+                        <li><code>style="inline|block"</code> - <?php esc_html_e('Display style', 'puzzlesync'); ?></li>
+                        <li><code>show_current="true|false"</code> - <?php esc_html_e('Show current language flag', 'puzzlesync'); ?></li>
+                        <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'puzzlesync'); ?></li>
                     </ul>
-                    <p><strong><?php esc_html_e('Example:', 'pressml'); ?></strong> <code>[pressml_language_flags size="large" style="block"]</code></p>
+                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[pressml_language_flags size="large" style="block"]</code></p>
 
                     <h4><code>[pressml_language_switcher]</code></h4>
-                    <p><?php esc_html_e('Displays a full language switcher with flags and text.', 'pressml'); ?></p>
-                    <p><strong><?php esc_html_e('Parameters:', 'pressml'); ?></strong></p>
+                    <p><?php esc_html_e('Displays a full language switcher with flags and text.', 'puzzlesync'); ?></p>
+                    <p><strong><?php esc_html_e('Parameters:', 'puzzlesync'); ?></strong></p>
                     <ul>
-                        <li><code>show_flags="true|false"</code> - <?php esc_html_e('Show flag icons', 'pressml'); ?></li>
-                        <li><code>show_names="true|false"</code> - <?php esc_html_e('Show language names', 'pressml'); ?></li>
-                        <li><code>separator=" | "</code> - <?php esc_html_e('Text between languages', 'pressml'); ?></li>
-                        <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'pressml'); ?></li>
+                        <li><code>show_flags="true|false"</code> - <?php esc_html_e('Show flag icons', 'puzzlesync'); ?></li>
+                        <li><code>show_names="true|false"</code> - <?php esc_html_e('Show language names', 'puzzlesync'); ?></li>
+                        <li><code>separator=" | "</code> - <?php esc_html_e('Text between languages', 'puzzlesync'); ?></li>
+                        <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'puzzlesync'); ?></li>
                     </ul>
-                    <p><strong><?php esc_html_e('Example:', 'pressml'); ?></strong> <code>[pressml_language_switcher show_flags="true" show_names="false"]</code></p>
+                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[pressml_language_switcher show_flags="true" show_names="false"]</code></p>
 
                     <h4><code>[pressml_current_language]</code></h4>
-                    <p><?php esc_html_e('Displays the current language.', 'pressml'); ?></p>
-                    <p><strong><?php esc_html_e('Parameters:', 'pressml'); ?></strong></p>
+                    <p><?php esc_html_e('Displays the current language.', 'puzzlesync'); ?></p>
+                    <p><strong><?php esc_html_e('Parameters:', 'puzzlesync'); ?></strong></p>
                     <ul>
-                        <li><code>format="name|code|flag"</code> - <?php esc_html_e('Display format', 'pressml'); ?></li>
-                        <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'pressml'); ?></li>
+                        <li><code>format="name|code|flag"</code> - <?php esc_html_e('Display format', 'puzzlesync'); ?></li>
+                        <li><code>debug="true|false"</code> - <?php esc_html_e('Show debug information', 'puzzlesync'); ?></li>
                     </ul>
-                    <p><strong><?php esc_html_e('Example:', 'pressml'); ?></strong> <code>[pressml_current_language format="flag"]</code></p>
+                    <p><strong><?php esc_html_e('Example:', 'puzzlesync'); ?></strong> <code>[pressml_current_language format="flag"]</code></p>
                 </div>
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Troubleshooting', 'pressml'); ?></h2>
+                    <h2><?php esc_html_e('Troubleshooting', 'puzzlesync'); ?></h2>
 
-                    <h3><?php esc_html_e('Shortcodes not working?', 'pressml'); ?></h3>
-                    <p><?php esc_html_e('Add debug="true" to any shortcode to see diagnostic information:', 'pressml'); ?></p>
+                    <h3><?php esc_html_e('Shortcodes not working?', 'puzzlesync'); ?></h3>
+                    <p><?php esc_html_e('Add debug="true" to any shortcode to see diagnostic information:', 'puzzlesync'); ?></p>
                     <p><code>[pressml_language_flags debug="true"]</code></p>
 
-                    <h3><?php esc_html_e('No translations found?', 'pressml'); ?></h3>
+                    <h3><?php esc_html_e('No translations found?', 'puzzlesync'); ?></h3>
                     <ul>
-                        <li><?php esc_html_e('Make sure posts have the PressML meta box filled out', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Check that translation groups match between related posts', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Verify URLs are correct and accessible', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Use the Validator page to check for issues', 'pressml'); ?></li>
+                        <li><?php esc_html_e('Make sure posts have the PuzzleSync meta box filled out', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Check that translation groups match between related posts', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Verify URLs are correct and accessible', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Use the Validator page to check for issues', 'puzzlesync'); ?></li>
                     </ul>
 
-                    <h3><?php esc_html_e('Language not detected?', 'pressml'); ?></h3>
+                    <h3><?php esc_html_e('Language not detected?', 'puzzlesync'); ?></h3>
                     <ul>
-                        <li><?php esc_html_e('Assign posts to "English" or "German" categories', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Or add "english-version" or "german-version" tags', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Both lowercase and capitalized names work', 'pressml'); ?></li>
+                        <li><?php esc_html_e('Assign posts to "English" or "German" categories', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Or add "english-version" or "german-version" tags', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Both lowercase and capitalized names work', 'puzzlesync'); ?></li>
                     </ul>
                 </div>
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Navigation Menu Integration', 'pressml'); ?></h2>
-                    <p><?php esc_html_e('Add language flags to your navigation menus:', 'pressml'); ?></p>
+                    <h2><?php esc_html_e('Navigation Menu Integration', 'puzzlesync'); ?></h2>
+                    <p><?php esc_html_e('Add language flags to your navigation menus:', 'puzzlesync'); ?></p>
 
-                    <h3><?php esc_html_e('Method 1: Automatic (Recommended)', 'pressml'); ?></h3>
-                    <p><?php esc_html_e('Language flags automatically appear at the end of your navigation menu when viewing posts/pages that have translations. Only shows flags for other languages (not current language). No setup required!', 'pressml'); ?></p>
+                    <h3><?php esc_html_e('Method 1: Automatic (Recommended)', 'puzzlesync'); ?></h3>
+                    <p><?php esc_html_e('Language flags automatically appear at the end of your navigation menu when viewing posts/pages that have translations. Only shows flags for other languages (not current language). No setup required!', 'puzzlesync'); ?></p>
 
-                    <h3><?php esc_html_e('Method 2: Manual Placement', 'pressml'); ?></h3>
+                    <h3><?php esc_html_e('Method 2: Manual Placement', 'puzzlesync'); ?></h3>
                     <ol>
-                        <li><?php esc_html_e('Go to Appearance → Menus', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Add a "Custom Link" menu item', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Set URL to:', 'pressml'); ?> <code>#pressml-language-flags</code></li>
-                        <li><?php esc_html_e('Set Link Text to: "Language Flags"', 'pressml'); ?></li>
-                        <li><?php esc_html_e('Save menu', 'pressml'); ?></li>
+                        <li><?php esc_html_e('Go to Appearance → Menus', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Add a "Custom Link" menu item', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Set URL to:', 'puzzlesync'); ?> <code>#puzzlesync-language-flags</code></li>
+                        <li><?php esc_html_e('Set Link Text to: "Language Flags"', 'puzzlesync'); ?></li>
+                        <li><?php esc_html_e('Save menu', 'puzzlesync'); ?></li>
                     </ol>
-                    <p><em><?php esc_html_e('The custom link will be replaced with actual flag links only when translations exist.', 'pressml'); ?></em></p>
+                    <p><em><?php esc_html_e('The custom link will be replaced with actual flag links only when translations exist.', 'puzzlesync'); ?></em></p>
                 </div>
 
                 <div class="chrmrtns-pml-card">
-                    <h2><?php esc_html_e('Tools & Validation', 'pressml'); ?></h2>
-                    <p><?php esc_html_e('Use the built-in tools to maintain your multilingual setup:', 'pressml'); ?></p>
+                    <h2><?php esc_html_e('Tools & Validation', 'puzzlesync'); ?></h2>
+                    <p><?php esc_html_e('Use the built-in tools to maintain your multilingual setup:', 'puzzlesync'); ?></p>
 
                     <ul>
-                        <li><strong><?php esc_html_e('Validator:', 'pressml'); ?></strong> <?php esc_html_e('Checks for common issues and can auto-fix some problems', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('Statistics:', 'pressml'); ?></strong> <?php esc_html_e('Shows overview of your multilingual content', 'pressml'); ?></li>
-                        <li><strong><?php esc_html_e('Settings:', 'pressml'); ?></strong> <?php esc_html_e('Configure plugin behavior and supported languages', 'pressml'); ?></li>
+                        <li><strong><?php esc_html_e('Validator:', 'puzzlesync'); ?></strong> <?php esc_html_e('Checks for common issues and can auto-fix some problems', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('Statistics:', 'puzzlesync'); ?></strong> <?php esc_html_e('Shows overview of your multilingual content', 'puzzlesync'); ?></li>
+                        <li><strong><?php esc_html_e('Settings:', 'puzzlesync'); ?></strong> <?php esc_html_e('Configure plugin behavior and supported languages', 'puzzlesync'); ?></li>
                     </ul>
                 </div>
 
@@ -1260,7 +1260,7 @@ class Chrmrtns_Pml_Admin {
 
         if (file_exists($logo_path)) {
             $logo_url = plugin_dir_url(dirname(__FILE__)) . 'assets/logo.png';
-            return '<img src="' . esc_url($logo_url) . '" alt="PressML" style="height: 32px; width: auto; vertical-align: middle; margin-right: 10px;" />';
+            return '<img src="' . esc_url($logo_url) . '" alt="PuzzleSync" style="height: 32px; width: auto; vertical-align: middle; margin-right: 10px;" />';
         }
 
         return '';

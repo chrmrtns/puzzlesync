@@ -1,9 +1,9 @@
-=== PressML - Multilingual Content Manager ===
+=== PuzzleSync - Multilingual Content Manager ===
 Contributors: chrmrtns
 Tags: multilingual, translation, i18n, language switcher, bricks
 Requires at least: 5.8
 Tested up to: 6.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Advanced multilingual hreflang management system with custom database storage fo
 
 == Description ==
 
-PressML is a powerful multilingual content management plugin that provides advanced hreflang management with custom database storage. It offers efficient translation management and seamless integration with your content workflow.
+PuzzleSync is a powerful multilingual content management plugin that provides advanced hreflang management with custom database storage. It offers efficient translation management and seamless integration with your content workflow.
 
 = Key Features =
 
@@ -31,15 +31,15 @@ PressML is a powerful multilingual content management plugin that provides advan
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/pressml` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/puzzlesync` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Use the Settings->PressML screen to configure the plugin.
+3. Use the Settings->PuzzleSync screen to configure the plugin.
 
 == Frequently Asked Questions ==
 
 = How do I add translations for my content? =
 
-Navigate to your post/page editor and use the PressML meta box to set up translation relationships and hreflang attributes.
+Navigate to your post/page editor and use the PuzzleSync meta box to set up translation relationships and hreflang attributes.
 
 = Can I add more languages? =
 
@@ -48,22 +48,22 @@ Yes, the plugin is designed to be extensible. Additional language support can be
 = What shortcodes are available? =
 
 Display current language information:
-`[pressml_current_language format="name"]`
+`[puzzlesync_current_language format="name"]`
 
 Available formats: name, code, flag
 
 Display language switcher with flags and text:
-`[pressml_language_switcher show_flags="true" show_names="true"]`
+`[puzzlesync_language_switcher show_flags="true" show_names="true"]`
 
 Display compact flag-only language switcher:
-`[pressml_language_flags size="medium" style="inline"]`
+`[puzzlesync_language_flags size="medium" style="inline"]`
 
 Available sizes: small, medium, large
 Available styles: inline, block
 
 = What is JSON-LD structured data? =
 
-PressML automatically generates JSON-LD structured data for improved SEO. This includes:
+PuzzleSync automatically generates JSON-LD structured data for improved SEO. This includes:
 * WebPage schema markup with language information
 * Multilingual content relationships
 * Proper language annotations for search engines
@@ -73,9 +73,9 @@ The JSON-LD data is automatically added to the page header when translations are
 = Are there template functions for developers? =
 
 Yes, several functions are available:
-* `pressml_get_current_language()` - Get current language
-* `pressml_get_translations($post_id)` - Get available translations for a post
-* `pressml_get_hreflang_tags()` - Get hreflang tags for current post
+* `puzzlesync_get_current_language()` - Get current language
+* `puzzlesync_get_translations($post_id)` - Get available translations for a post
+* `puzzlesync_get_hreflang_tags()` - Get hreflang tags for current post
 
 == Screenshots ==
 
@@ -85,6 +85,14 @@ Yes, several functions are available:
 4. Statistics dashboard
 
 == Changelog ==
+
+= 1.0.3 =
+* Changed: Plugin renamed from "PressML" to "PuzzleSync" to comply with WordPress.org trademark guidelines
+* Changed: Text domain updated from 'pressml' to 'puzzlesync'
+* Changed: All shortcodes renamed (pressml_* → puzzlesync_*)
+* Changed: Plugin slug updated from 'pressml' to 'puzzlesync'
+* Note: Database tables and internal functions remain unchanged (chrmrtns_pml_*) - no migration needed
+* Note: This is a branding change only - all functionality remains identical to v1.0.2
 
 = 1.0.2 =
 * Fixed: Hreflang tags now correctly output both language-specific tags (en, de) AND x-default tag
@@ -98,7 +106,7 @@ Yes, several functions are available:
 * Code quality: Enhanced security and maintainability by following WordPress best practices
 
 = 1.0.0 =
-* Initial release
+* Initial release as "PressML"
 * Custom database storage for hreflang data
 * Translation group management
 * Validation system with auto-fix capabilities
@@ -106,6 +114,9 @@ Yes, several functions are available:
 * Security hardening and WordPress standards compliance
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+Plugin renamed to PuzzleSync to comply with WordPress trademark guidelines. All functionality remains identical. Database tables unchanged - no migration needed.
 
 = 1.0.0 =
 Initial release of PressML - Multilingual Content Manager.
@@ -116,9 +127,9 @@ Initial release of PressML - Multilingual Content Manager.
 
 The plugin provides several hooks for customization:
 
-* `pressml_supported_languages` - Modify supported languages
-* `pressml_detect_language` - Custom language detection
-* `pressml_hreflang_tags` - Modify hreflang output
+* `puzzlesync_supported_languages` - Modify supported languages
+* `puzzlesync_detect_language` - Custom language detection
+* `puzzlesync_hreflang_tags` - Modify hreflang output
 
 = Database Structure =
 

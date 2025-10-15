@@ -34,12 +34,12 @@
 
             if (url && !isValidUrl(url)) {
                 $input.css('border-color', '#d63638');
-                if (!$input.next('.pressml-error').length) {
-                    $input.after('<span class="pressml-error" style="color: #d63638; font-size: 12px;">Please enter a valid URL</span>');
+                if (!$input.next('.puzzlesync-error').length) {
+                    $input.after('<span class="puzzlesync-error" style="color: #d63638; font-size: 12px;">Please enter a valid URL</span>');
                 }
             } else {
                 $input.css('border-color', '');
-                $input.next('.pressml-error').remove();
+                $input.next('.puzzlesync-error').remove();
             }
         });
     }
@@ -64,7 +64,7 @@
 
         if ($translationGroupInput.length && typeof pressmlAdmin !== 'undefined' && pressmlAdmin.translationGroups) {
             // Create datalist for autocomplete
-            var datalistId = 'pressml-translation-groups';
+            var datalistId = 'puzzlesync-translation-groups';
             var $datalist = $('<datalist id="' + datalistId + '"></datalist>');
 
             $.each(pressmlAdmin.translationGroups, function(index, group) {
@@ -80,7 +80,7 @@
      * Initialize tab navigation for settings page
      */
     function initTabNavigation() {
-        var $tabs = $('.pressml-settings-tabs');
+        var $tabs = $('.puzzlesync-settings-tabs');
         if (!$tabs.length) {
             return;
         }
@@ -96,7 +96,7 @@
             $link.addClass('nav-tab-active');
 
             // Show/hide content
-            $('.pressml-settings-content').hide();
+            $('.puzzlesync-settings-content').hide();
             $(target).show();
 
             // Update URL without reload
@@ -163,7 +163,7 @@
                     var url = window.URL.createObjectURL(blob);
                     var a = document.createElement('a');
                     a.href = url;
-                    a.download = 'pressml-settings-' + new Date().toISOString().split('T')[0] + '.json';
+                    a.download = 'puzzlesync-settings-' + new Date().toISOString().split('T')[0] + '.json';
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);

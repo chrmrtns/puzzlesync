@@ -1,8 +1,8 @@
 <?php
 /**
- * Core functionality class for PressML plugin
+ * Core functionality class for PuzzleSync plugin
  *
- * @package PressML
+ * @package PuzzleSync
  */
 
 if (!defined('ABSPATH')) {

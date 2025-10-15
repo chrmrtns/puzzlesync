@@ -1,9 +1,9 @@
 <?php
 /**
- * Validator class for PressML plugin
+ * Validator class for PuzzleSync plugin
  * Validates hreflang implementation and checks for common issues
  *
- * @package PressML
+ * @package PuzzleSync
  */
 
 if (!defined('ABSPATH')) {
@@ -56,7 +56,7 @@ class Chrmrtns_Pml_Validator {
             if (!$post) {
                 $this->issues[] = sprintf(
                     // translators: %d: Post ID
-                    __('Post ID %d no longer exists but has hreflang entries', 'pressml'),
+                    __('Post ID %d no longer exists but has hreflang entries', 'puzzlesync'),
                     $post_id
                 );
                 continue;
@@ -67,7 +67,7 @@ class Chrmrtns_Pml_Validator {
                 if (!filter_var($entry->url, FILTER_VALIDATE_URL)) {
                     $this->issues[] = sprintf(
                         // translators: %1$s: Post title, %2$s: Language code, %3$s: URL
-                        __('Invalid URL format for %1$s (language: %2$s): %3$s', 'pressml'),
+                        __('Invalid URL format for %1$s (language: %2$s): %3$s', 'puzzlesync'),
                         $post->post_title,
                         $entry->language_code,
                         $entry->url
@@ -80,7 +80,7 @@ class Chrmrtns_Pml_Validator {
                     if (is_wp_error($response)) {
                         $this->warnings[] = sprintf(
                             // translators: %1$s: Post title, %2$s: Language code, %3$s: URL
-                            __('URL not accessible for %1$s (language: %2$s): %3$s', 'pressml'),
+                            __('URL not accessible for %1$s (language: %2$s): %3$s', 'puzzlesync'),
                             $post->post_title,
                             $entry->language_code,
                             $entry->url
@@ -88,7 +88,7 @@ class Chrmrtns_Pml_Validator {
                     } elseif (wp_remote_retrieve_response_code($response) >= 400) {
                         $this->issues[] = sprintf(
                             // translators: %1$d: HTTP response code, %2$s: Post title, %3$s: Language code, %4$s: URL
-                            __('URL returns error %1$d for %2$s (language: %3$s): %4$s', 'pressml'),
+                            __('URL returns error %1$d for %2$s (language: %3$s): %4$s', 'puzzlesync'),
                             wp_remote_retrieve_response_code($response),
                             $post->post_title,
                             $entry->language_code,
@@ -122,7 +122,7 @@ class Chrmrtns_Pml_Validator {
             if (count(array_unique($post_counts)) > 1) {
                 $this->issues[] = sprintf(
                     // translators: %s: Translation group name
-                    __('Translation group "%s" has inconsistent language coverage', 'pressml'),
+                    __('Translation group "%s" has inconsistent language coverage', 'puzzlesync'),
                     $group
                 );
             }
@@ -137,7 +137,7 @@ class Chrmrtns_Pml_Validator {
                         $post = get_post($entry->post_id);
                         $this->warnings[] = sprintf(
                             // translators: %1$s: Post title, %2$d: Post ID, %3$s: Language code
-                            __('Post "%1$s" (ID: %2$d) is missing reference to %3$s language', 'pressml'),
+                            __('Post "%1$s" (ID: %2$d) is missing reference to %3$s language', 'puzzlesync'),
                             $post ? $post->post_title : 'Unknown',
                             $entry->post_id,
                             $lang
@@ -161,7 +161,7 @@ class Chrmrtns_Pml_Validator {
             if (count($unique_posts) < 2) {
                 $this->warnings[] = sprintf(
                     // translators: %1$s: Translation group name, %2$d: Number of posts
-                    __('Translation group "%1$s" has only %2$d post(s)', 'pressml'),
+                    __('Translation group "%1$s" has only %2$d post(s)', 'puzzlesync'),
                     $group,
                     count($unique_posts)
                 );
@@ -181,7 +181,7 @@ class Chrmrtns_Pml_Validator {
                 if (count(array_unique($post_ids)) > 1) {
                     $this->issues[] = sprintf(
                         // translators: %1$s: Translation group name, %2$s: Language code
-                        __('Translation group "%1$s" has multiple posts for language %2$s', 'pressml'),
+                        __('Translation group "%1$s" has multiple posts for language %2$s', 'puzzlesync'),
                         $group,
                         $lang
                     );
@@ -210,7 +210,7 @@ class Chrmrtns_Pml_Validator {
                 $post = get_post($post_id);
                 $this->issues[] = sprintf(
                     // translators: %1$s: Post title, %2$d: Post ID
-                    __('Post "%1$s" (ID: %2$d) has multiple x-default entries', 'pressml'),
+                    __('Post "%1$s" (ID: %2$d) has multiple x-default entries', 'puzzlesync'),
                     $post ? $post->post_title : 'Unknown',
                     $post_id
                 );
@@ -221,7 +221,7 @@ class Chrmrtns_Pml_Validator {
                 $post = get_post($post_id);
                 $this->warnings[] = sprintf(
                     // translators: %1$s: Post title, %2$d: Post ID
-                    __('Post "%1$s" (ID: %2$d) has multiple languages but no x-default set', 'pressml'),
+                    __('Post "%1$s" (ID: %2$d) has multiple languages but no x-default set', 'puzzlesync'),
                     $post ? $post->post_title : 'Unknown',
                     $post_id
                 );
@@ -257,7 +257,7 @@ class Chrmrtns_Pml_Validator {
                     if ($entry->url === $current_url && $entry->language_code !== $detected_language) {
                         $this->warnings[] = sprintf(
                             // translators: %1$s: Post title, %2$s: Detected language, %3$s: Self-referenced language
-                            __('Post "%1$s" detected as %2$s but self-references as %3$s', 'pressml'),
+                            __('Post "%1$s" detected as %2$s but self-references as %3$s', 'puzzlesync'),
                             $post->post_title,
                             $detected_language,
                             $entry->language_code
@@ -271,7 +271,7 @@ class Chrmrtns_Pml_Validator {
                 if (!$self_reference_found && count($hreflang_data) > 0) {
                     $this->warnings[] = sprintf(
                         // translators: %s: Post title
-                        __('Post "%s" has hreflang tags but no self-reference', 'pressml'),
+                        __('Post "%s" has hreflang tags but no self-reference', 'puzzlesync'),
                         $post->post_title
                     );
                 }
@@ -295,7 +295,7 @@ class Chrmrtns_Pml_Validator {
         if ($orphaned_count > 0) {
             $this->issues[] = sprintf(
                 // translators: %d: Number of orphaned entries
-                __('%d orphaned hreflang entries found (posts no longer exist)', 'pressml'),
+                __('%d orphaned hreflang entries found (posts no longer exist)', 'puzzlesync'),
                 $orphaned_count
             );
         }
@@ -322,7 +322,7 @@ class Chrmrtns_Pml_Validator {
             $post = get_post($duplicate->post_id);
             $this->issues[] = sprintf(
                 // translators: %1$s: Post title, %2$d: Post ID, %3$s: Language code
-                __('Duplicate entries found for post "%1$s" (ID: %2$d), language %3$s', 'pressml'),
+                __('Duplicate entries found for post "%1$s" (ID: %2$d), language %3$s', 'puzzlesync'),
                 $post ? $post->post_title : 'Unknown',
                 $duplicate->post_id,
                 $duplicate->language_code
@@ -365,7 +365,7 @@ class Chrmrtns_Pml_Validator {
         if ($orphaned_deleted > 0) {
             $fixes_applied[] = sprintf(
                 // translators: %d: Number of orphaned entries removed
-                __('Removed %d orphaned entries', 'pressml'),
+                __('Removed %d orphaned entries', 'puzzlesync'),
                 $orphaned_deleted
             );
         }
@@ -375,7 +375,7 @@ class Chrmrtns_Pml_Validator {
         if ($self_refs_added > 0) {
             $fixes_applied[] = sprintf(
                 // translators: %d: Number of self-references added
-                __('Added %d missing self-references', 'pressml'),
+                __('Added %d missing self-references', 'puzzlesync'),
                 $self_refs_added
             );
         }
@@ -385,7 +385,7 @@ class Chrmrtns_Pml_Validator {
         if ($x_defaults_set > 0) {
             $fixes_applied[] = sprintf(
                 // translators: %d: Number of x-default values set
-                __('Set %d missing x-default values', 'pressml'),
+                __('Set %d missing x-default values', 'puzzlesync'),
                 $x_defaults_set
             );
         }
