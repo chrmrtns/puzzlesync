@@ -1,24 +1,24 @@
 /**
- * PressML Admin Styles
+ * PuzzleSync Admin Styles
  *
- * @package PressML
+ * @package PuzzleSync
  * @since 1.0.0
  */
 
-.chrmrtns-pml-meta-box table {
+.chrmrtns-puzzlesync-meta-box table {
     width: 100%;
 }
 
-.chrmrtns-pml-meta-box td {
+.chrmrtns-puzzlesync-meta-box td {
     padding: 10px 5px;
 }
 
-.chrmrtns-pml-meta-box input[type="url"],
-.chrmrtns-pml-meta-box input[type="text"] {
+.chrmrtns-puzzlesync-meta-box input[type="url"],
+.chrmrtns-puzzlesync-meta-box input[type="text"] {
     width: 100%;
 }
 
-.chrmrtns-pml-info-box {
+.chrmrtns-puzzlesync-info-box {
     background: #f0f0f1;
     padding: 15px;
     margin-top: 20px;

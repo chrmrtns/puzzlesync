@@ -3,13 +3,15 @@
  * Database operations class for PuzzleSync plugin
  *
  * @package PuzzleSync
+ * @since 1.0.4
  */
+namespace Chrmrtns\PuzzleSync\Database;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class Chrmrtns_Pml_Database {
+class Database {
 
     private $table_name;
     private $wpdb;
@@ -17,7 +19,7 @@ class Chrmrtns_Pml_Database {
     public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
-        $this->table_name = $wpdb->prefix . CHRMRTNS_PML_TABLE_NAME;
+        $this->table_name = $wpdb->prefix . CHRMRTNS_PUZZLESYNC_TABLE_NAME;
     }
 
     /**

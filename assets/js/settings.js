@@ -6,7 +6,7 @@
  */
 
 jQuery(document).ready(function($) {
-    let languageIndex = pressmlSettings.languageCount;
+    let languageIndex = puzzlesyncSettings.languageCount;
 
     $('#chrmrtns-pml-add-language').click(function() {
         const newRow = `
@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
                 </td>
                 <td>
                     <button type="button" class="button chrmrtns-pml-remove-language">
-                        ${pressmlSettings.textRemove}
+                        ${puzzlesyncSettings.textRemove}
                     </button>
                 </td>
             </tr>

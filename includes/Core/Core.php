@@ -3,18 +3,21 @@
  * Core functionality class for PuzzleSync plugin
  *
  * @package PuzzleSync
+ * @since 1.0.4
  */
+namespace Chrmrtns\PuzzleSync\Core;
 
+use Chrmrtns\PuzzleSync\Database\Database;
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class Chrmrtns_Pml_Core {
+class Core {
 
     private $db;
 
     public function __construct() {
-        $this->db = new Chrmrtns_Pml_Database();
+        $this->db = new Database();
     }
 
     public function init() {
@@ -25,7 +28,7 @@ class Chrmrtns_Pml_Core {
         add_filter('language_attributes', array($this, 'modify_language_attributes'));
 
         // Add JSON-LD structured data if enabled
-        if (get_option('chrmrtns_pml_enable_json_ld', true)) {
+        if (get_option('chrmrtns_puzzlesync_enable_json_ld', true)) {
             add_action('wp_footer', array($this, 'output_json_ld'));
         }
     }
@@ -71,8 +74,8 @@ class Chrmrtns_Pml_Core {
 
         // Priority 2: Check for custom fields (backward compatibility)
         $hreflang_urls = array();
-        $hreflang_en = get_post_meta($post_id, 'chrmrtns_pml_hreflang_en', true);
-        $hreflang_de = get_post_meta($post_id, 'chrmrtns_pml_hreflang_de', true);
+        $hreflang_en = get_post_meta($post_id, 'chrmrtns_puzzlesync_hreflang_en', true);
+        $hreflang_de = get_post_meta($post_id, 'chrmrtns_puzzlesync_hreflang_de', true);
 
         if ($hreflang_en || $hreflang_de) {
             if ($hreflang_en) {
@@ -104,17 +107,24 @@ class Chrmrtns_Pml_Core {
         $post = get_post($post_id);
         $hreflang_urls = array();
 
-        if (has_category('english', $post) || has_tag('english-version', $post)) {
-            $german_post = $this->find_translation_by_category($post, 'german');
-            if ($german_post) {
-                $hreflang_urls['de'] = get_permalink($german_post->ID);
-                $hreflang_urls['en'] = get_permalink($post->ID);
+        $current_lang = $this->detect_post_language($post);
+        if (!$current_lang) {
+            return $hreflang_urls;
+        }
+
+        // Add current post URL for its language
+        $hreflang_urls[$current_lang] = get_permalink($post->ID);
+
+        // Find translations in other languages
+        $supported_languages = $this->get_supported_languages();
+        foreach ($supported_languages as $lang) {
+            if ($lang['code'] === $current_lang) {
+                continue; // Skip current language
             }
-        } elseif (has_category('german', $post) || has_tag('german-version', $post)) {
-            $english_post = $this->find_translation_by_category($post, 'english');
-            if ($english_post) {
-                $hreflang_urls['en'] = get_permalink($english_post->ID);
-                $hreflang_urls['de'] = get_permalink($post->ID);
+
+            $translation_post = $this->find_translation_by_category($post, $lang['name']);
+            if ($translation_post) {
+                $hreflang_urls[$lang['code']] = get_permalink($translation_post->ID);
             }
         }
 
@@ -125,7 +135,7 @@ class Chrmrtns_Pml_Core {
      * Find translation by category
      */
     private function find_translation_by_category($post, $target_language) {
-        $translation_group = get_post_meta($post->ID, 'chrmrtns_pml_translation_group', true);
+        $translation_group = get_post_meta($post->ID, 'chrmrtns_puzzlesync_translation_group', true);
 
         $query_args = array(
             'post_type' => $post->post_type,
@@ -137,7 +147,7 @@ class Chrmrtns_Pml_Core {
         if ($translation_group) {
             $query_args['meta_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
                 array(
-                    'key' => 'chrmrtns_pml_translation_group',
+                    'key' => 'chrmrtns_puzzlesync_translation_group',
                     'value' => $translation_group,
                     'compare' => '='
                 )
@@ -173,10 +183,10 @@ class Chrmrtns_Pml_Core {
 
         global $post;
 
-        if (has_category('english', $post) || has_tag('english-version', $post)) {
-            return 'lang="en-US"';
-        } elseif (has_category('german', $post) || has_tag('german-version', $post)) {
-            return 'lang="de-DE"';
+        $lang_code = $this->detect_post_language($post);
+        if ($lang_code) {
+            $locale = $this->language_code_to_locale($lang_code);
+            return 'lang="' . esc_attr($locale) . '"';
         }
 
         // Check hreflang settings
@@ -251,17 +261,24 @@ class Chrmrtns_Pml_Core {
     }
 
     /**
-     * Determine post language
+     * Determine post language (returns locale format like 'en-US')
      */
     private function determine_post_language($post) {
-        if (has_category('english', $post) || has_tag('english-version', $post)) {
-            return 'en-US';
-        } elseif (has_category('german', $post) || has_tag('german-version', $post)) {
-            return 'de-DE';
+        $lang_code = $this->detect_post_language($post);
+
+        if ($lang_code) {
+            return $this->language_code_to_locale($lang_code);
         }
 
+        // Fallback to site locale
         $locale = get_locale();
-        return ($locale === 'de_DE') ? 'de-DE' : 'en-US';
+        $locale_parts = explode('_', $locale);
+        if (count($locale_parts) >= 2) {
+            return $locale_parts[0] . '-' . strtoupper($locale_parts[1]);
+        }
+
+        // Default fallback
+        return 'en-US';
     }
 
     /**
@@ -283,7 +300,7 @@ class Chrmrtns_Pml_Core {
      * Determine x-default language
      */
     private function determine_x_default($urls, $post_id) {
-        $default_meta = get_post_meta($post_id, 'chrmrtns_pml_hreflang_default', true);
+        $default_meta = get_post_meta($post_id, 'chrmrtns_puzzlesync_hreflang_default', true);
 
         if ($default_meta && isset($urls[$default_meta])) {
             return $default_meta;
@@ -308,7 +325,100 @@ class Chrmrtns_Pml_Core {
         $this->save_hreflang_data($post_id, $urls);
 
         // Optionally remove old custom fields
-        // delete_post_meta($post_id, 'chrmrtns_pml_hreflang_en');
-        // delete_post_meta($post_id, 'chrmrtns_pml_hreflang_de');
+        // delete_post_meta($post_id, 'chrmrtns_puzzlesync_hreflang_en');
+        // delete_post_meta($post_id, 'chrmrtns_puzzlesync_hreflang_de');
+    }
+
+    /**
+     * Get supported languages from settings
+     */
+    private function get_supported_languages() {
+        return get_option('chrmrtns_puzzlesync_languages', array(
+            array('code' => 'en', 'name' => 'English', 'flag' => '🇺🇸'),
+            array('code' => 'de', 'name' => 'Deutsch', 'flag' => '🇩🇪')
+        ));
+    }
+
+    /**
+     * Detect post language from categories and tags dynamically
+     * Returns language code (e.g., 'en', 'de', 'fr') or null if not detected
+     */
+    private function detect_post_language($post) {
+        $supported_languages = $this->get_supported_languages();
+
+        foreach ($supported_languages as $lang) {
+            // Check for various category/tag variations
+            $lang_name_lower = function_exists('mb_strtolower') ? mb_strtolower($lang['name'], 'UTF-8') : strtolower($lang['name']);
+            $lang_name_cap = function_exists('mb_convert_case') ? mb_convert_case($lang['name'], MB_CASE_TITLE, 'UTF-8') : ucfirst($lang_name_lower);
+
+            $variations = array(
+                $lang_name_lower,
+                $lang_name_cap,
+                $lang['name'],
+                $lang['code'],
+                strtolower($lang['code']),
+                strtoupper($lang['code'])
+            );
+
+            foreach ($variations as $var) {
+                // Check categories
+                if (has_category($var, $post)) {
+                    return $lang['code'];
+                }
+                // Check tags (with and without -version suffix)
+                if (has_tag($var, $post) || has_tag($var . '-version', $post) || has_tag($var . '_version', $post)) {
+                    return $lang['code'];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Convert language code to locale format
+     * e.g., 'en' -> 'en-US', 'de' -> 'de-DE', 'fr' -> 'fr-FR'
+     */
+    private function language_code_to_locale($code) {
+        // Common mappings
+        $locale_map = array(
+            'en' => 'en-US',
+            'de' => 'de-DE',
+            'fr' => 'fr-FR',
+            'es' => 'es-ES',
+            'it' => 'it-IT',
+            'pt' => 'pt-PT',
+            'nl' => 'nl-NL',
+            'pl' => 'pl-PL',
+            'ru' => 'ru-RU',
+            'ja' => 'ja-JP',
+            'zh' => 'zh-CN',
+            'ko' => 'ko-KR',
+            'ar' => 'ar-SA',
+            'tr' => 'tr-TR',
+            'sv' => 'sv-SE',
+            'da' => 'da-DK',
+            'no' => 'no-NO',
+            'fi' => 'fi-FI',
+            'cs' => 'cs-CZ',
+            'hu' => 'hu-HU',
+            'ro' => 'ro-RO',
+            'el' => 'el-GR',
+            'he' => 'he-IL',
+            'th' => 'th-TH',
+            'vi' => 'vi-VN',
+            'id' => 'id-ID',
+            'uk' => 'uk-UA',
+            'hr' => 'hr-HR',
+            'sk' => 'sk-SK',
+            'bg' => 'bg-BG',
+        );
+
+        if (isset($locale_map[$code])) {
+            return $locale_map[$code];
+        }
+
+        // Fallback: uppercase the code
+        return $code . '-' . strtoupper($code);
     }
 }

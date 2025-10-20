@@ -4,20 +4,23 @@
  * Validates hreflang implementation and checks for common issues
  *
  * @package PuzzleSync
- */
+ * @since 1.0.4
+namespace Chrmrtns\PuzzleSync\Validator;
+
+use Chrmrtns\PuzzleSync\Database\Database; */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class Chrmrtns_Pml_Validator {
+class Validator {
 
     private $db;
     private $issues = array();
     private $warnings = array();
 
     public function __construct() {
-        $this->db = new Chrmrtns_Pml_Database();
+        $this->db = new Database();
     }
 
     /**
@@ -243,13 +246,7 @@ class Chrmrtns_Pml_Validator {
 
             // Check if post language matches its hreflang self-reference
             $current_url = get_permalink($post_id);
-            $detected_language = null;
-
-            if (has_category('english', $post) || has_tag('english-version', $post)) {
-                $detected_language = 'en';
-            } elseif (has_category('german', $post) || has_tag('german-version', $post)) {
-                $detected_language = 'de';
-            }
+            $detected_language = $this->detect_post_language($post);
 
             if ($detected_language) {
                 $self_reference_found = false;
@@ -334,8 +331,8 @@ class Chrmrtns_Pml_Validator {
      * Check if URL accessibility should be checked
      */
     private function should_check_url_accessibility() {
-        return get_option('chrmrtns_pml_enable_validation', true) &&
-               get_option('chrmrtns_pml_check_url_accessibility', false);
+        return get_option('chrmrtns_puzzlesync_enable_validation', true) &&
+               get_option('chrmrtns_puzzlesync_check_url_accessibility', false);
     }
 
     /**
@@ -417,15 +414,10 @@ class Chrmrtns_Pml_Validator {
 
             if (!$has_self_reference && count($hreflang_data) > 0) {
                 // Detect language
-                $language = null;
-                if (has_category('english', $post) || has_tag('english-version', $post)) {
-                    $language = 'en';
-                } elseif (has_category('german', $post) || has_tag('german-version', $post)) {
-                    $language = 'de';
-                }
+                $language = $this->detect_post_language($post);
 
                 if ($language) {
-                    $translation_group = get_post_meta($post_id, 'chrmrtns_pml_translation_group', true);
+                    $translation_group = get_post_meta($post_id, 'chrmrtns_puzzlesync_translation_group', true);
                     $this->db->insert_or_update_hreflang($post_id, $language, $current_url, $translation_group);
                     $added++;
                 }
@@ -477,5 +469,51 @@ class Chrmrtns_Pml_Validator {
         }
 
         return $set;
+    }
+
+    /**
+     * Get supported languages from settings
+     */
+    private function get_supported_languages() {
+        return get_option('chrmrtns_puzzlesync_languages', array(
+            array('code' => 'en', 'name' => 'English', 'flag' => '🇺🇸'),
+            array('code' => 'de', 'name' => 'Deutsch', 'flag' => '🇩🇪')
+        ));
+    }
+
+    /**
+     * Detect post language from categories and tags dynamically
+     * Returns language code (e.g., 'en', 'de', 'fr') or null if not detected
+     */
+    private function detect_post_language($post) {
+        $supported_languages = $this->get_supported_languages();
+
+        foreach ($supported_languages as $lang) {
+            // Check for various category/tag variations
+            $lang_name_lower = function_exists('mb_strtolower') ? mb_strtolower($lang['name'], 'UTF-8') : strtolower($lang['name']);
+            $lang_name_cap = function_exists('mb_convert_case') ? mb_convert_case($lang['name'], MB_CASE_TITLE, 'UTF-8') : ucfirst($lang_name_lower);
+
+            $variations = array(
+                $lang_name_lower,
+                $lang_name_cap,
+                $lang['name'],
+                $lang['code'],
+                strtolower($lang['code']),
+                strtoupper($lang['code'])
+            );
+
+            foreach ($variations as $var) {
+                // Check categories
+                if (has_category($var, $post)) {
+                    return $lang['code'];
+                }
+                // Check tags (with and without -version suffix)
+                if (has_tag($var, $post) || has_tag($var . '-version', $post) || has_tag($var . '_version', $post)) {
+                    return $lang['code'];
+                }
+            }
+        }
+
+        return null;
     }
 }

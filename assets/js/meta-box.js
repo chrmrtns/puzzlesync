@@ -6,26 +6,26 @@
  */
 
 jQuery(document).ready(function($) {
-    $('#chrmrtns_pml_sync_group').on('click', function(e) {
+    $('#chrmrtns_puzzlesync_sync_group').on('click', function(e) {
         e.preventDefault();
 
-        var translationGroup = $('#chrmrtns_pml_translation_group').val();
+        var translationGroup = $('#chrmrtns_puzzlesync_translation_group').val();
         if (!translationGroup) {
-            alert(pressmlMetaBox.alertEnterGroup);
+            alert(puzzlesyncMetaBox.alertEnterGroup);
             return;
         }
 
         var button = $(this);
-        button.prop('disabled', true).text(pressmlMetaBox.textSyncing);
+        button.prop('disabled', true).text(puzzlesyncMetaBox.textSyncing);
 
         $.ajax({
             url: ajaxurl,
             type: 'POST',
             data: {
-                action: 'chrmrtns_pml_sync_translation_group',
+                action: 'chrmrtns_puzzlesync_sync_translation_group',
                 translation_group: translationGroup,
-                post_id: pressmlMetaBox.postId,
-                nonce: pressmlMetaBox.nonce
+                post_id: puzzlesyncMetaBox.postId,
+                nonce: puzzlesyncMetaBox.nonce
             },
             success: function(response) {
                 if (response.success) {
@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
                     $.each(response.data, function(key, url) {
                         if (key.endsWith('_url')) {
                             var langCode = key.replace('_url', '');
-                            var fieldId = '#chrmrtns_pml_hreflang_' + langCode;
+                            var fieldId = '#chrmrtns_puzzlesync_hreflang_' + langCode;
                             if ($(fieldId).length) {
                                 $(fieldId).val(url);
                                 urlsUpdated++;
@@ -43,19 +43,19 @@ jQuery(document).ready(function($) {
                     });
 
                     if (urlsUpdated > 0) {
-                        alert(pressmlMetaBox.textSyncSuccess + ' (' + urlsUpdated + ' ' + pressmlMetaBox.textFieldsUpdated + ')');
+                        alert(puzzlesyncMetaBox.textSyncSuccess + ' (' + urlsUpdated + ' ' + puzzlesyncMetaBox.textFieldsUpdated + ')');
                     } else {
-                        alert(pressmlMetaBox.alertNoFields);
+                        alert(puzzlesyncMetaBox.alertNoFields);
                     }
                 } else {
-                    alert(response.data || pressmlMetaBox.alertSyncFailed);
+                    alert(response.data || puzzlesyncMetaBox.alertSyncFailed);
                 }
             },
             error: function() {
-                alert(pressmlMetaBox.alertAjaxError);
+                alert(puzzlesyncMetaBox.alertAjaxError);
             },
             complete: function() {
-                button.prop('disabled', false).text(pressmlMetaBox.textSyncButton);
+                button.prop('disabled', false).text(puzzlesyncMetaBox.textSyncButton);
             }
         });
     });

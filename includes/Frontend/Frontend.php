@@ -3,13 +3,17 @@
  * Frontend functionality class for PuzzleSync plugin
  *
  * @package PuzzleSync
+ * @since 1.0.4
  */
+namespace Chrmrtns\PuzzleSync\Frontend;
+
+use Chrmrtns\PuzzleSync\Database\Database;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class Chrmrtns_Pml_Frontend {
+class Frontend {
 
     private $core;
 
@@ -34,7 +38,7 @@ class Chrmrtns_Pml_Frontend {
         add_filter('wp_nav_menu_objects', array($this, 'modify_menu_for_translations'), 10, 2);
 
         // Add automatic menu flags if enabled in settings
-        if (get_option('chrmrtns_pml_auto_menu_flags', false)) {
+        if (get_option('chrmrtns_puzzlesync_auto_menu_flags', false)) {
             add_filter('wp_nav_menu_items', array($this, 'add_automatic_menu_flags'), 10, 2);
         }
     }
@@ -43,7 +47,7 @@ class Chrmrtns_Pml_Frontend {
      * Get supported languages
      */
     private function get_supported_languages() {
-        return get_option('chrmrtns_pml_languages', array(
+        return get_option('chrmrtns_puzzlesync_languages', array(
             array('code' => 'en', 'name' => 'English', 'flag' => '🇺🇸'),
             array('code' => 'de', 'name' => 'Deutsch', 'flag' => '🇩🇪')
         ));
@@ -80,7 +84,7 @@ class Chrmrtns_Pml_Frontend {
         ), $atts);
 
         global $post;
-        $db = new Chrmrtns_Pml_Database();
+        $db = new Database();
         $hreflang_data = $db->get_hreflang_by_post($post->ID);
 
         if (empty($hreflang_data)) {
@@ -159,38 +163,38 @@ class Chrmrtns_Pml_Frontend {
         if ($atts['debug'] === 'true') {
             $debug_output = '<div style="color: orange; border: 1px solid orange; padding: 10px; margin-bottom: 10px;">';
             $debug_output .= 'DEBUG (Current Language): Post ID ' . $post->ID . '<br>';
-            $debug_output .= 'Has English category: ' . ((has_category('english', $post) || has_category('English', $post)) ? 'Yes' : 'No') . '<br>';
-            $debug_output .= 'Has English tag: ' . ((has_tag('english-version', $post) || has_tag('English-version', $post)) ? 'Yes' : 'No') . '<br>';
-            $debug_output .= 'Has German category: ' . ((has_category('german', $post) || has_category('German', $post)) ? 'Yes' : 'No') . '<br>';
-            $debug_output .= 'Has German tag: ' . ((has_tag('german-version', $post) || has_tag('German-version', $post)) ? 'Yes' : 'No') . '<br>';
+
+            $supported_languages = $this->get_supported_languages();
+            foreach ($supported_languages as $lang) {
+                $lang_name = $lang['name'];
+                $lang_code = $lang['code'];
+                $has_cat = has_category(array(strtolower($lang_name), ucfirst(strtolower($lang_name))), $post);
+                $has_tag = has_tag(array(strtolower($lang_name), ucfirst(strtolower($lang_name)), strtolower($lang_name) . '-version', ucfirst(strtolower($lang_name)) . '-version', $lang_code, strtoupper($lang_code)), $post);
+                $debug_output .= 'Has ' . esc_html($lang_name) . ' category: ' . ($has_cat ? 'Yes' : 'No') . '<br>';
+                $debug_output .= 'Has ' . esc_html($lang_name) . ' tag: ' . ($has_tag ? 'Yes' : 'No') . '<br>';
+            }
+
             $debug_output .= 'Site locale: ' . get_locale() . '<br>';
             $debug_output .= '</div>';
         }
 
         // Detect current language
         $result = '';
+        $lang_code = $this->detect_post_language($post);
 
-        if (has_category('english', $post) || has_category('English', $post) || has_tag('english-version', $post) || has_tag('English-version', $post)) {
-            switch ($atts['format']) {
-                case 'code':
-                    $result = 'en';
-                    break;
-                case 'flag':
-                    $result = '🇺🇸';
-                    break;
-                default:
-                    $result = 'English';
-            }
-        } elseif (has_category('german', $post) || has_category('German', $post) || has_tag('german-version', $post) || has_tag('German-version', $post)) {
-            switch ($atts['format']) {
-                case 'code':
-                    $result = 'de';
-                    break;
-                case 'flag':
-                    $result = '🇩🇪';
-                    break;
-                default:
-                    $result = 'Deutsch';
+        if ($lang_code) {
+            $lang_info = $this->get_language_info($lang_code);
+            if ($lang_info) {
+                switch ($atts['format']) {
+                    case 'code':
+                        $result = $lang_info['code'];
+                        break;
+                    case 'flag':
+                        $result = $lang_info['flag'];
+                        break;
+                    default:
+                        $result = $lang_info['name'];
+                }
             }
         } else {
             // Fallback to site locale
@@ -241,7 +245,7 @@ class Chrmrtns_Pml_Frontend {
         ), $atts);
 
         global $post;
-        $db = new Chrmrtns_Pml_Database();
+        $db = new Database();
         $hreflang_data = $db->get_hreflang_by_post($post->ID);
 
         if (empty($hreflang_data)) {
@@ -430,7 +434,7 @@ class Chrmrtns_Pml_Frontend {
         }
 
         global $post;
-        $db = new Chrmrtns_Pml_Database();
+        $db = new Database();
         $hreflang_data = $db->get_hreflang_by_post($post->ID);
 
         if (empty($hreflang_data) || count($hreflang_data) < 2) {
@@ -459,7 +463,7 @@ class Chrmrtns_Pml_Frontend {
         }
 
         if (!empty($language_flags)) {
-            $menu_flags_display = get_option('chrmrtns_pml_menu_flags_display', 'row');
+            $menu_flags_display = get_option('chrmrtns_puzzlesync_menu_flags_display', 'row');
             $column_class = ($menu_flags_display === 'column') ? ' chrmrtns-pml-flags-column' : '';
             $menu_item = '<li class="menu-item chrmrtns-pml-menu-item-language-flags' . $column_class . '">' . $language_flags . '</li>';
             $items .= $menu_item;
@@ -480,14 +484,14 @@ class Chrmrtns_Pml_Frontend {
                 // Replace with actual language flags
                 if (is_singular()) {
                     global $post;
-                    $db = new Chrmrtns_Pml_Database();
+                    $db = new Database();
                     $hreflang_data = $db->get_hreflang_by_post($post->ID);
 
                     if (!empty($hreflang_data) && count($hreflang_data) >= 2) {
                         $current_url = get_permalink($post->ID);
                         $flags_html = '';
 
-                        $menu_flags_display = get_option('chrmrtns_pml_menu_flags_display', 'row');
+                        $menu_flags_display = get_option('chrmrtns_puzzlesync_menu_flags_display', 'row');
 
                         foreach ($hreflang_data as $translation) {
                             $is_current = ($translation->url === $current_url);
@@ -530,5 +534,41 @@ class Chrmrtns_Pml_Frontend {
         }
 
         return $items;
+    }
+
+    /**
+     * Detect post language from categories and tags dynamically
+     * Returns language code (e.g., 'en', 'de', 'fr') or null if not detected
+     */
+    private function detect_post_language($post) {
+        $supported_languages = $this->get_supported_languages();
+
+        foreach ($supported_languages as $lang) {
+            // Check for various category/tag variations
+            $lang_name_lower = function_exists('mb_strtolower') ? mb_strtolower($lang['name'], 'UTF-8') : strtolower($lang['name']);
+            $lang_name_cap = function_exists('mb_convert_case') ? mb_convert_case($lang['name'], MB_CASE_TITLE, 'UTF-8') : ucfirst($lang_name_lower);
+
+            $variations = array(
+                $lang_name_lower,
+                $lang_name_cap,
+                $lang['name'],
+                $lang['code'],
+                strtolower($lang['code']),
+                strtoupper($lang['code'])
+            );
+
+            foreach ($variations as $var) {
+                // Check categories
+                if (has_category($var, $post)) {
+                    return $lang['code'];
+                }
+                // Check tags (with and without -version suffix)
+                if (has_tag($var, $post) || has_tag($var . '-version', $post) || has_tag($var . '_version', $post)) {
+                    return $lang['code'];
+                }
+            }
+        }
+
+        return null;
     }
 }

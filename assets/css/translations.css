@@ -1,0 +1,205 @@
+/**
+ * PuzzleSync Translation UI Styles
+ *
+ * @package PuzzleSync
+ * @since 1.1.0
+ */
+
+/* Translation wrapper */
+.chrmrtns-puzzlesync-translations-wrapper {
+    margin: 10px 0;
+}
+
+/* Translation tabs */
+.chrmrtns-puzzlesync-translation-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.chrmrtns-puzzlesync-tab-button {
+    background: #f0f0f1;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.chrmrtns-puzzlesync-tab-button:hover {
+    background: #e0e0e1;
+    border-color: #999;
+}
+
+.chrmrtns-puzzlesync-tab-button.active {
+    background: #2271b1;
+    color: white;
+    border-color: #2271b1;
+}
+
+.chrmrtns-puzzlesync-tab-button .flag {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+/* Translation panels */
+.chrmrtns-puzzlesync-translation-panel {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.chrmrtns-puzzlesync-translation-panel h3 {
+    margin-top: 0;
+    color: #23282d;
+}
+
+/* Field rows */
+.chrmrtns-puzzlesync-field-row {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 1200px) {
+    .chrmrtns-puzzlesync-field-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Field columns */
+.chrmrtns-puzzlesync-field-column {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.chrmrtns-puzzlesync-field-column h4 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+}
+
+.chrmrtns-puzzlesync-field-column .original-value {
+    color: #555;
+    font-style: italic;
+    min-height: 40px;
+    padding: 8px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    line-height: 1.6;
+}
+
+.chrmrtns-puzzlesync-field-column input[type="text"],
+.chrmrtns-puzzlesync-field-column textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.chrmrtns-puzzlesync-field-column textarea {
+    min-height: 100px;
+    resize: vertical;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.chrmrtns-puzzlesync-field-column input[type="text"]:focus,
+.chrmrtns-puzzlesync-field-column textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+.chrmrtns-puzzlesync-field-column input[disabled],
+.chrmrtns-puzzlesync-field-column textarea[disabled] {
+    background: #f0f0f1;
+    cursor: not-allowed;
+}
+
+/* Labels */
+.chrmrtns-puzzlesync-field-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #23282d;
+}
+
+/* Pro badge */
+.chrmrtns-puzzlesync-pro-badge {
+    background: #f0ad4e;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 5px;
+    display: inline-block;
+}
+
+/* Translation status indicators */
+.chrmrtns-puzzlesync-translation-status {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f6fc;
+    border-left: 4px solid #2271b1;
+    border-radius: 3px;
+}
+
+.chrmrtns-puzzlesync-translation-status.incomplete {
+    background: #fff3cd;
+    border-left-color: #f0ad4e;
+}
+
+.chrmrtns-puzzlesync-translation-status.complete {
+    background: #d1e7dd;
+    border-left-color: #0f6;
+}
+
+/* Help text */
+.chrmrtns-puzzlesync-help-text {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Loading state */
+.chrmrtns-puzzlesync-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #2271b1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Empty state */
+.chrmrtns-puzzlesync-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.chrmrtns-puzzlesync-empty-state p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
